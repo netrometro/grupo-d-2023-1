@@ -32,3 +32,28 @@ export default async function allergyController(fastify: FastifyInstance) {
         user_id: string
     }
     
+    fastify.post<{ Body: IAllergyBody }>('/allergies/create', async (request, reply) => {
+        
+        try {
+            const { name, treatment, description, user_id } = request.body;
+            const createdAllergy = await prisma.alergy.create({
+                data: {
+                    name,
+                    treatment,
+                    description,
+                    user: { connect: { id: user_id } }
+                },
+            });
+
+            reply.status(201).send({ message: 'Alergia criada com sucesso!' });
+            console.log(`Alergia criada: ${JSON.stringify(createdAllergy)}`);
+        } catch (error) {
+            console.error(error);
+            reply.status(400).send({ message: 'Erro ao criar alergia!' });
+        }
+    });
+
+    interface IAllergyByIdParam {
+        id: number
+    }
+    
