@@ -23,7 +23,7 @@ model User {
 }
 
 model Info{
-  id       String   @id @default(uuid())
+  id        Int   @id @default(autoincrement())
   altura    Float
   peso      Float
   idade     Int
@@ -34,7 +34,7 @@ model Info{
 }
 
 model Symptom{
-  id        String   @id @default(uuid())
+  id        Int   @id @default(autoincrement())
   name      String
   description String?
   medication String?
@@ -47,7 +47,7 @@ model Symptom{
 }
 
 model Alergy {
-  id        String   @id @default(uuid())
+  id        Int   @id @default(autoincrement())
   name      String
   treatment  String?
   description String?
