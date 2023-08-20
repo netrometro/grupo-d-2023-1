@@ -11,3 +11,15 @@ Content-Type: application/json
     "description": "Allergic reaction to pollen",
     "user_id": "8d9e01e0-d5ea-4a37-8542-b00ecc88eabc"
 }
+
+###
+
+PUT http://127.0.0.1:3333/allergies/update/:id
+Content-Type: application/json
+
+{
+    "name": "Updated Pollen Allergy",
+    "treatment": "New Treatment",
+    "description": "Updated description"
+}
+
