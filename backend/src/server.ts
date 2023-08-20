@@ -1,6 +1,7 @@
 import Fastify from 'fastify'
 import { FastifyInstance } from 'fastify/types/instance';
 import fastifyCors from '@fastify/cors';
+import symptomController from './symptom/symptomController';
 
 export const fastify: FastifyInstance = Fastify({
   logger: true
@@ -10,6 +11,7 @@ fastify.register(fastifyCors, {
   origin: '*',
 });
 
+fastify.register(symptomController)
 
 /**
  * Run the server!

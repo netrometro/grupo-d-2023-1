@@ -1,0 +1,12 @@
+PUT http://127.0.0.1:3333/symptoms/update/2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Dor de cabeça",
+    "description": "Dores de cabeça durante o dia",
+    "medication" : "dorflex",
+    "startDate": "2021-04-01",
+    "endDate": "2021-05-01",
+    "user_id": "df4f8363-f123-4e3e-ab40-8b4e28f2eee0"
+    
+}

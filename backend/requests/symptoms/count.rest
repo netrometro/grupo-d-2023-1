@@ -1,0 +1,1 @@
+GET http://127.0.0.1:3333/symptoms/count HTTP/1.1
