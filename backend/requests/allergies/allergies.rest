@@ -6,7 +6,7 @@ POST http://127.0.0.1:3333/allergies/create
 Content-Type: application/json
 
 {
-    "name": "Pollen Allergy",
+    "name": "Pollen Allergy 2",
     "treatment": "Antihistamines",
     "description": "Allergic reaction to pollen",
     "user_id": "8d9e01e0-d5ea-4a37-8542-b00ecc88eabc"
@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://127.0.0.1:3333/allergies/delete/:id
+DELETE http://127.0.0.1:3333/allergies/delete/2
 
 ###
 
