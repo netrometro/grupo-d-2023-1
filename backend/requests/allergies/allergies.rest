@@ -27,3 +27,6 @@ Content-Type: application/json
 
 DELETE http://127.0.0.1:3333/allergies/delete/:id
 
+###
+
+GET http://127.0.0.1:3333/allergies
