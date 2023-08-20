@@ -79,3 +79,18 @@ export default async function allergyController(fastify: FastifyInstance) {
         }
     });
 
+    fastify.delete<{ Params: IAllergyByIdParam }>('/allergies/delete/:id', async (request, reply) => {
+        try {
+            const { id } = request.params;
+            
+            await prisma.alergy.delete({
+                where: { id: Number(id) },
+            });
+
+            reply.status(200).send({ message: 'Alergia deletada com sucesso!' });
+        } catch (error) {
+            console.error(error);
+            reply.status(400).send({ message: 'Erro ao deletar alergia!' });
+        }
+    });
+}
