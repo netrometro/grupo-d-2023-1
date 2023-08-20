@@ -57,3 +57,25 @@ export default async function allergyController(fastify: FastifyInstance) {
         id: number
     }
     
+    fastify.put<{ Params: IAllergyByIdParam, Body: IAllergyBody }>('/allergies/update/:id', async (request, reply) => {
+        const { id } = request.params;
+        const { name, treatment, description } = request.body;
+
+        try {
+            const updatedAllergy = await prisma.alergy.update({
+                where: { id: Number(id) },
+                data: {
+                    name,
+                    treatment,
+                    description,
+                },
+            });
+
+            reply.status(200).send({ message: 'Alergia atualizada com sucesso!' });
+            console.log(`Alergia atualizada: ${JSON.stringify(updatedAllergy)}`);
+        } catch (error) {
+            console.error(error);
+            reply.status(400).send({ message: 'Erro ao atualizar alergia!' });
+        }
+    });
+
