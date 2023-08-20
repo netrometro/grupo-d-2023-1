@@ -23,3 +23,7 @@ Content-Type: application/json
     "description": "Updated description"
 }
 
+###
+
+DELETE http://127.0.0.1:3333/allergies/delete/:id
+
