@@ -1,10 +1,12 @@
 import React from "react";
 import { Text, FlatList, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Header from "../components/Header";
 import { Ionicons } from '@expo/vector-icons';
 
 export default function Home() {
 
+    const navigation = useNavigation(); 
 
     const optionsData = [
         { id: "1", icon: "clipboard", text: "IMC", route: "IMC"},
@@ -14,10 +16,15 @@ export default function Home() {
     ];
 
     const renderOption = ({ item }) => (
+        <TouchableOpacity
+            style={styles.optionView}
+            onPress={() => navigation.navigate(item.route)}
+        >
             <View style={styles.optionIcon}>
                 <Ionicons name={item.icon} size={33} color="#98AD47" />
             </View>
             <Text style={styles.optionText}>{item.text}</Text>
+        </TouchableOpacity>
     );
 
     return (
