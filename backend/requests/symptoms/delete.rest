@@ -1,1 +1,1 @@
-DELETE  http://127.0.0.1:3333/symptoms/delete/1 HTTP/1.1
+DELETE  http://127.0.0.1:3333/symptoms/delete/2 HTTP/1.1

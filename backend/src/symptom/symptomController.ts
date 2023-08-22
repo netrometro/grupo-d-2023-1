@@ -1,5 +1,6 @@
 import { prisma } from '../lib/prisma'
 import { FastifyInstance } from 'fastify';
+import { z } from 'zod';
 
 export default async function symptomController(fastify: FastifyInstance) {
     
@@ -33,19 +34,22 @@ export default async function symptomController(fastify: FastifyInstance) {
         }
     });
 
-    interface ISymptomBody {
-        name: string,
-        description: string,
-        medication: string,
-        startDate: string,
-        endDate: string,
-        user_id: string
-    };
-    
-    fastify.post<{Body: ISymptomBody}>('/symptoms/create', async (request, reply) => {   
+    const symptomIdParam = z.object({
+        id: z.number()
+    });
+
+    const createSymptomSchema = z.object({
+        name: z.string(),
+        description: z.string(),
+        medication: z.string(),
+        startDate: z.string(),
+        endDate: z.string(),
+        user_id: z.string()
+    });
+    fastify.post('/symptoms/create', async (request, reply) => {   
         
         try{
-            const {name, description, medication, startDate, endDate, user_id} = request.body;
+            const {name, description, medication, startDate, endDate, user_id} = createSymptomSchema.parse(request.body);
             const createdSymptom = await prisma.symptom.create({
                 
                 data: {
@@ -69,23 +73,16 @@ export default async function symptomController(fastify: FastifyInstance) {
         }
     })
     
-    interface ISymptomByIdParam {
+
+    fastify.put('/symptoms/update/:id', async (request, reply) => {
         
-        id: number
-        
-    };
-    
-    fastify.put <{Params: ISymptomByIdParam, Body:ISymptomBody}>('/symptoms/update/:id', async (request, reply) => {
-        
-        const {id} = request.params;
-        
-        const {name, description, medication, startDate, endDate} = request.body;
+        const {name, description, medication, startDate, endDate} = createSymptomSchema.parse(request.body);
 
         try{
-
+            const {id} = symptomIdParam.parse(request.params);
             const updatedSymptom = await prisma.symptom.update({
             
-                where: { id: Number(id) },
+                where: { id: id },
             
                 data: {
                     name,
@@ -109,9 +106,9 @@ export default async function symptomController(fastify: FastifyInstance) {
 
       })
       
-      fastify.delete<{Params: ISymptomByIdParam}>('/symptoms/delete/:id', async (request, reply) => {
+      fastify.delete('/symptoms/delete/:id', async (request, reply) => {
         try{
-            const {id} = request.params;
+            const {id} = symptomIdParam.parse(request.params);
             
             await prisma.symptom.delete({
 
