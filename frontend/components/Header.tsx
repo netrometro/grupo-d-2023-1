@@ -20,11 +20,26 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     container: {
+        width: '100%',
+        height: '25%',
+        padding: 70,
+        paddingTop: 24,
+        paddingBottom: 20,
+        backgroundColor: '#29B1C3',
+        justifyContent: 'space-around',
     },
     headerView: {
+        paddingTop: 32,
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     welcomeText: {
+        fontFamily: 'Helvetica-Oblique',
+        color: '#fff',
+        fontSize: 16,
+        textAlign: 'center',
     },
     name: {
+        fontWeight: 'bold',
     },
 });
