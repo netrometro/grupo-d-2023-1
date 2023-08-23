@@ -148,13 +148,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Inter",
+    paddingBottom: 30,
   },
 
   mainTitle: {
     fontSize: 20,
     fontWeight: "normal",
     marginTop: 8,
-    textAlign: "left",
+    textAlign: "center",
   },
 
   title: {
