@@ -6,19 +6,19 @@ export default function Header() {
     const logo = require('../assets/logo.png')
 
     return (
-        <View style={styles.container}>
-            <View style={styles.headerView}>
+        <View style={HeaderStyles.container}>
+            <View style={HeaderStyles.headerView}>
                 <Image source={logo} />
             </View>
 
-            <Text style={styles.welcomeText}>
-                Olá, <Text style={styles.name}>Fulane</Text>
+            <Text style={HeaderStyles.welcomeText}>
+                Olá, <Text style={HeaderStyles.name}>Fulane</Text>
             </Text>
         </View>
     );
 }
 
-const styles = StyleSheet.create({
+const HeaderStyles = StyleSheet.create({
     container: {
         width: '100%',
         height: '25%',
