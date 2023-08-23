@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Inter",
-    paddingBottom: 30,
+    paddingBottom: 110,
   },
 
   mainTitle: {
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#98AD47",
     borderRadius: 10,
     padding: 10,
-    width: "auto",
+    width: 100,
   },
 
   input: {
