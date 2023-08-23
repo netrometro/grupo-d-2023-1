@@ -17,38 +17,38 @@ export default function Home() {
 
     const renderOption = ({ item }) => (
         <TouchableOpacity
-            style={styles.optionView}
+            style={homeStyles.optionView}
             onPress={() => navigation.navigate(item.route)}
         >
-            <View style={styles.optionIcon}>
+            <View style={homeStyles.optionIcon}>
                 <Ionicons name={item.icon} size={33} color="#98AD47" />
             </View>
-            <Text style={styles.optionText}>{item.text}</Text>
+            <Text style={homeStyles.optionText}>{item.text}</Text>
         </TouchableOpacity>
     );
 
     return (
-        <View style={styles.container}>
+        <View style={homeStyles.container}>
             <Header/>
             <View>
-                <View style={styles.homeSelection}>
-                    <Text style={styles.question}>Do que você precisa hoje?</Text>
+                <View style={homeStyles.homeSelection}>
+                    <Text style={homeStyles.question}>Do que você precisa hoje?</Text>
                     <FlatList
                         data={optionsData}
                         keyExtractor={(item) => item.id}
                         horizontal
                         showsHorizontalScrollIndicator={false}
-                        contentContainerStyle={styles.flatListContainer}
+                        contentContainerStyle={homeStyles.flatListContainer}
                         renderItem={renderOption}
                     />
-                    <View style={styles.borderLine} />
+                    <View style={homeStyles.borderLine} />
                 </View>
             </View>
         </View>
     );
 }
 
-const styles = StyleSheet.create({
+const homeStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
@@ -92,5 +92,6 @@ const styles = StyleSheet.create({
         height: 2,
         backgroundColor: '#e6e6e6',
     },
+    
 });
 
