@@ -3,6 +3,7 @@ import {Text, View, StyleSheet} from 'react-native'
 import Header from "../components/Header";
 import { Ionicons } from '@expo/vector-icons';
 import NewAllergy from "../components/NewAllergy";
+import GetAlergy from "../components/GetAllergy";
 
 export default function Allergy() {
   return (
@@ -17,6 +18,7 @@ export default function Allergy() {
       </View>
       <View style={allergyStyles.containerComp}>
         <NewAllergy/>
+        <GetAlergy/>
       </View>
     </View>
   );
