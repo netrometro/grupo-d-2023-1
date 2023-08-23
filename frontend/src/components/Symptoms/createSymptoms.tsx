@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FontAwesome5 } from "@expo/vector-icons";
 import {
   View,
   Text,
@@ -32,91 +33,110 @@ export default function CreateSymptoms() {
 
   async function createSymptom(event: GestureResponderEvent) {
     event.preventDefault();
+  
     try {
-      const response = await instance.post("/symptoms/create", {
-        symptom: symptomName,
+      // Prepare the data to be sent in the request body
+      const newSymptomData = {
+        name: symptomName,
         description: symptomDescription,
         medication: symptomMedication,
-        initialDate: symptomInitialDate,
-        finalDate: symptomFinalDate,
+        startDate: symptomInitialDate,
+        endDate: symptomFinalDate,
         user_id: user_id,
-      });
-
-      alert("Sintoma cadastrado com sucesso");
-      console.log(response);
-
-      // Clear input fields and fetch updated symptoms list
-      setSymptomName("");
-      setSymptomDescription("");
-      setSymptomMedication("");
-      setSymptomInitialDate("");
-      setSymptomFinalDate("");
-
-      const updatedResponse = await instance.get("/symptoms");
-      setSymptomsList(updatedResponse.data);
+      };
+  
+      // Send a POST request to the server to create a new symptom
+      const response = await instance.post("/symptoms/create", newSymptomData);
+  
+      // Check if the request was successful
+      if (response.status === 201) {
+        // Clear input fields and fetch updated symptoms list
+        setSymptomName("");
+        setSymptomDescription("");
+        setSymptomMedication("");
+        setSymptomInitialDate("");
+        setSymptomFinalDate("");
+  
+        const updatedResponse = await instance.get("/symptoms");
+        setSymptomsList(updatedResponse.data);
+  
+        // Show success message
+        alert("Sintoma cadastrado com sucesso");
+        console.log(response.data);
+      } else {
+        // Show error message
+        alert("Erro ao cadastrar sintoma");
+      }
     } catch (err) {
       console.log(err);
+      // Show error message
       alert("Erro ao cadastrar sintoma");
     }
   }
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{display: "flex", flexDirection: "row", gap:8, justifyContent: "flex-start"}}>
+        <View style={styles.elipse}> 
+            <FontAwesome5 name="heartbeat" size={20} color="#98AD47" />
+        </View>
         <Text style={styles.mainTitle}> Sintomas </Text>
       </View>
-
+      
       <Text style={styles.title}> Cadastrar sintomas</Text>
-      <View>
-        <Text style={styles.label}> Sintoma: </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite o nome do sintoma"
-          value={symptomName}
-          onChangeText={setSymptomName}
-        />
+      <View style={{display: "flex", alignItems: "center", justifyContent: "center",}}>
+            
+        
+        <View>
+            <Text style={styles.label}> Sintoma: </Text>
+            <TextInput
+            style={styles.input}
+            placeholder="Digite o nome do sintoma"
+            value={symptomName}
+            onChangeText={setSymptomName}
+            />
+        </View>
+        <View>
+            <Text style={styles.label}> Informações adicionais </Text>
+            <TextInput
+            style={styles.bigInput}
+            placeholder="Ex: sintoma acontece quando estou nervosa"
+            value={symptomDescription}
+            onChangeText={setSymptomDescription}
+            />
+        </View>
+        <View>
+            <Text style={styles.label}> Medicação </Text>
+            <TextInput
+            style={styles.input}
+            placeholder="Digite medicação, caso tenha tomadoo alguma"
+            value={symptomMedication}
+            onChangeText={setSymptomMedication}
+            />
+        </View>
+        <View>
+            <Text style={styles.label}> Data inicial do sintoma: </Text>
+            <TextInput
+            style={styles.input}
+            placeholder="Digite a data em que o sintoma começou"
+            value={symptomInitialDate}
+            onChangeText={setSymptomInitialDate}
+            />
+        </View>
+        <View>
+            <Text style={styles.label}> Data final: </Text>
+            <TextInput
+            style={styles.input}
+            placeholder="Digite a data em que parou de sentir sintoma"
+            value={symptomFinalDate}
+            onChangeText={setSymptomFinalDate}
+            />
+        </View>
       </View>
-      <View>
-        <Text style={styles.label}> Informações adicionais </Text>
-        <TextInput
-          style={styles.bigInput}
-          placeholder="Ex: sintoma acontece quando estou nervosa"
-          value={symptomDescription}
-          onChangeText={setSymptomDescription}
-        />
-      </View>
-      <View>
-        <Text style={styles.label}> Medicação </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite medicação, caso tenha tomadoo alguma"
-          value={symptomMedication}
-          onChangeText={setSymptomMedication}
-        />
-      </View>
-      <View>
-        <Text style={styles.label}> Data inicial do sintoma: </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite a data em que o sintoma começou"
-          value={symptomInitialDate}
-          onChangeText={setSymptomInitialDate}
-        />
-      </View>
-      <View>
-        <Text style={styles.label}> Data final: </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite a data em que parou de sentir sintoma"
-          value={symptomFinalDate}
-          onChangeText={setSymptomFinalDate}
-        />
-      </View>
-
-      <View style={{ alignContent: "flex-end" }}>
+      <View style={{ display: "flex", flexDirection: "column", alignContent: "flex-end" }}>
         {/* botão de cadastro */}
         <TouchableOpacity style={styles.button} onPress={createSymptom}>
-          <Text>Cadastrar</Text>
+          <Text style={{color: "#fff", fontWeight: "bold",}}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -127,8 +147,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
     fontFamily: "Inter",
   },
 
@@ -163,10 +181,9 @@ const styles = StyleSheet.create({
 
   button: {
     backgroundColor: "#98AD47",
-    borderRadius: 19,
+    borderRadius: 10,
     padding: 10,
-    color: "#fff",
-    fontWeight: "bold",
+    width: "auto",
   },
 
   input: {
@@ -187,4 +204,12 @@ const styles = StyleSheet.create({
     paddingStart: 10,
     fontSize: 12,
   },
+  elipse: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    backgroundColor: "#D9D9D9",
+    alignItems: "center",
+    justifyContent: "center",
+    },
 });

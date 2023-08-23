@@ -8,8 +8,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { instance } from "../../api/axios";
-export default function ListSymptoms() {
+import { deleteSymptom } from "./deleteSymptoms";
+import EditSymptom from "./EditSymptoms";
 
+export default function ListSymptoms() {
   interface Symptoms {
     id: number;
     name: string;
@@ -24,6 +26,13 @@ export default function ListSymptoms() {
   }
 
   const [symptomsList, setSymptomsList] = useState<Symptoms[]>([]);
+  const [symptomName, setSymptomName] = useState("");
+  const [symptomDescription, setSymptomDescription] = useState("");
+  const [symptomMedication, setSymptomMedication] = useState("");
+  const [symptomInitialDate, setSymptomInitialDate] = useState("");
+  const [symptomFinalDate, setSymptomFinalDate] = useState("");
+  const user_id = "df4f8363-f123-4e3e-ab40-8b4e28f2eee0";
+
   useEffect(() => {
     // Fetch symptoms list from the server and update the state
     const fetchSymptoms = async () => {
@@ -36,46 +45,54 @@ export default function ListSymptoms() {
     };
     fetchSymptoms();
   }, []);
+
+  const renderSymptomCard = ({ item }) => (
+    <View style={styles.container}>
+        <View style={styles.card}>
+        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+            <TouchableOpacity style={{ marginRight: 10 }}>
+            <Feather name="edit" size={20} color="#98AD47" />
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <Feather
+                name="trash-2"
+                size={20}
+                color="#98AD47"
+                onPress={() => deleteSymptom(item.id, setSymptomsList)}
+            />
+            </TouchableOpacity>
+        </View>
+        <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 15 }}>
+            {item.name}
+        </Text>
+
+        <Text style={styles.labelgreen}> Descrição: </Text>
+        <Text style={styles.label}>{item.description}</Text>
+
+        <Text style={styles.labelgreen}> Medicação: </Text>
+        <Text style={styles.label}>{item.medication}</Text>
+
+        <View style={styles.row}>
+            <View style={{ flexDirection: "column" }}>
+            <Text style={styles.labelgreen}> Data inicial: </Text>
+            <Text style={styles.label}>{item.startDate}</Text>
+            </View>
+            <View style={{ flexDirection: "column" }}>
+            <Text style={styles.labelgreen}> Data final: </Text>
+            <Text style={styles.label}>{item.endDate}</Text>
+            </View>
+        </View>
+        </View>
+    </View>
+  );
+
   return (
-    <View style={{ marginTop: 30 }}>
+    <View style={{ margin: 30 }}>
       <Text style={styles.title}>Sintomas Registrados:</Text>
-      <FlatList
+      <FlatList horizontal={true} 
         data={symptomsList}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-              <TouchableOpacity style={{marginRight: 10}}>
-                <Feather name="edit" size={20} color="#98AD47" />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Feather name="trash-2" size={20} color="#98AD47" />
-              </TouchableOpacity>
-            </View>
-            <Text
-              style={{ fontSize: 16, textAlign: "center", marginBottom: 15 }}
-            >
-              {item.name}
-            </Text>
-
-            <Text style={styles.labelgreen}> Descrição: </Text>
-            <Text style={styles.label}>{item.description}</Text>
-
-            <Text style={styles.labelgreen}> Medicação: </Text>
-            <Text style={styles.label}>{item.medication}</Text>
-
-            <View style={styles.row}>
-              <View style={{ flexDirection: "column" }}>
-                <Text style={styles.labelgreen}> Data inicial: </Text>
-                <Text style={styles.label}>{item.startDate}</Text>
-              </View>
-              <View style={{ flexDirection: "column" }}>
-                <Text style={styles.labelgreen}> Data final: </Text>
-                <Text style={styles.label}>{item.endDate}</Text>
-              </View>
-            </View>
-          </View>
-        )}
+        renderItem={renderSymptomCard}
       />
     </View>
   );
@@ -125,6 +142,7 @@ const styles = StyleSheet.create({
     width: 308,
     height: "auto",
     marginBottom: 100,
+    marginRight: 20,
   },
 
   button: {
