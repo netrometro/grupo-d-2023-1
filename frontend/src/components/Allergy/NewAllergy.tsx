@@ -25,12 +25,12 @@ export default function NewAllergy() {
             allergyData.forEach(item => {
                 allergyToAdd[item.key] = item.value;
             });
-            allergyToAdd.user_id = "8d9e01e0-d5ea-4a37-8542-b00ecc88eabc";
+            allergyToAdd.user_id = "061ce154-d595-48b0-8aca-9962f1f5fb70";
 
             const response = await instance.post("/allergies/create", allergyToAdd);
             console.log(response.data);
 
-            if (response.data.id === "8d9e01e0-d5ea-4a37-8542-b00ecc88eabc") {
+            if (response.data.id === "061ce154-d595-48b0-8aca-9962f1f5fb70") {
                 console.log("Alergia criada com sucesso usando o ID desejado!");
             } else {
                 console.log("Alergia criada, mas o ID não corresponde ao esperado.");
@@ -40,17 +40,18 @@ export default function NewAllergy() {
         }
     };
 
-    const renderInputItem = ({ item }) => (
-        <View style={allergyStyles.inputItem}>
-            <Text style={allergyStyles.inputLabel}>{item.label}</Text>
-            <TextInput
-                style={allergyStyles.inputField}
-                placeholder={item.label}
-                value={item.value}
-                onChangeText={(text) => handleInputChange(item.key, text)}
-            />
-        </View>
-    );
+    function renderInputItem({ item }) {
+        return (
+            <View style={allergyStyles.inputItem}>
+                <Text style={allergyStyles.inputLabel}>{item.label}</Text>
+                <TextInput
+                    style={allergyStyles.inputField}
+                    placeholder={item.label}
+                    value={item.value}
+                    onChangeText={(text) => handleInputChange(item.key, text)} />
+            </View>
+        );
+    }
 
     return (
         <View style={allergyStyles.container}>

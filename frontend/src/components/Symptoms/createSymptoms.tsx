@@ -29,7 +29,7 @@ export default function CreateSymptoms() {
   const [symptomMedication, setSymptomMedication] = useState("");
   const [symptomInitialDate, setSymptomInitialDate] = useState("");
   const [symptomFinalDate, setSymptomFinalDate] = useState("");
-  const user_id = "df4f8363-f123-4e3e-ab40-8b4e28f2eee0";
+  const user_id = "061ce154-d595-48b0-8aca-9962f1f5fb70";
 
   async function createSymptom(event: GestureResponderEvent) {
     event.preventDefault();
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Inter",
-    paddingBottom: 110,
+    paddingBottom: 150,
   },
 
   mainTitle: {
