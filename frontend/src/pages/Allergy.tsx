@@ -2,8 +2,8 @@ import React from "react";
 import {Text, View, StyleSheet} from 'react-native'
 import Header from "../components/Header";
 import { Ionicons } from '@expo/vector-icons';
-import NewAllergy from "../components/NewAllergy";
-import GetAlergy from "../components/GetAllergy";
+import NewAllergy from "../components/Allergy/NewAllergy";
+import GetAlergy from "../components/Allergy/GetAllergy";
 
 export default function Allergy() {
   return (
