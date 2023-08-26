@@ -210,7 +210,10 @@ fastify.register(import_cors.default, {
 fastify.register(symptomController, allergyController);
 var start = async () => {
   try {
-    await fastify.listen({ port: 3333 });
+    const port = process.env.PORT || 3e3;
+    const host = "RENDER" in process.env ? `0.0.0.0` : `localhost`;
+    await fastify.listen(port, host);
+    fastify.log.info(`server listening on ${fastify.server.address()}`);
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
