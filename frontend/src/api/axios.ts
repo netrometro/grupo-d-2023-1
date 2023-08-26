@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-    baseURL: "http://localhost:3333/",
+    baseURL: "https://what-the-health.onrender.com",
 });

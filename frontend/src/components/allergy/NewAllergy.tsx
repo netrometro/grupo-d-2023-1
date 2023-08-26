@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { instance } from '../src/api/axios';
+import { instance } from '../../api/axios';
 
 export default function NewAllergy() {
     const [allergyData, setAllergyData] = useState([
