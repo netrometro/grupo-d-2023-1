@@ -19,12 +19,16 @@ fastify.register(symptomController, allergiesController)
  */
 const start = async () => {
   try {
-    const port = process.env.PORT || 3333;
-    await fastify.listen(port);
+    const port = process.env.PORT || 3000;
+    const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
+
+    await fastify.listen(port, host)
+    fastify.log.info(`server listening on ${fastify.server.address()}`)
   } catch (err) {
-    fastify.log.error(err);
-    process.exit(1);
+    fastify.log.error(err)
+    process.exit(1)
   }
-};
+}
+
 start() 
 
