@@ -9,7 +9,7 @@ export default function NewAllergy() {
         { label: "Descrição", key: "description", value: "" },
     ]);
 
-    const handleInputChange = (key, value) => {
+    const handleInputChange = (key: string, value: string) => {
         const updatedAllergyData = allergyData.map(item => {
             if (item.key === key) {
                 return { ...item, value };
@@ -25,12 +25,12 @@ export default function NewAllergy() {
             allergyData.forEach(item => {
                 allergyToAdd[item.key] = item.value;
             });
-            allergyToAdd.user_id = "061ce154-d595-48b0-8aca-9962f1f5fb70";
+            allergyToAdd.user_id = "6922fb9a-695a-446a-9cdf-3bdd7a8450bf";
 
             const response = await instance.post("/allergies/create", allergyToAdd);
             console.log(response.data);
 
-            if (response.data.id === "061ce154-d595-48b0-8aca-9962f1f5fb70") {
+            if (response.data.id === "6922fb9a-695a-446a-9cdf-3bdd7a8450bf") {
                 console.log("Alergia criada com sucesso usando o ID desejado!");
             } else {
                 console.log("Alergia criada, mas o ID não corresponde ao esperado.");

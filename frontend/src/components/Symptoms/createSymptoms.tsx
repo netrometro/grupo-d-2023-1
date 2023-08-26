@@ -29,7 +29,7 @@ export default function CreateSymptoms() {
   const [symptomMedication, setSymptomMedication] = useState("");
   const [symptomInitialDate, setSymptomInitialDate] = useState("");
   const [symptomFinalDate, setSymptomFinalDate] = useState("");
-  const user_id = "061ce154-d595-48b0-8aca-9962f1f5fb70";
+  const user_id = "6922fb9a-695a-446a-9cdf-3bdd7a8450bf";
 
   async function createSymptom(event: GestureResponderEvent) {
     event.preventDefault();
