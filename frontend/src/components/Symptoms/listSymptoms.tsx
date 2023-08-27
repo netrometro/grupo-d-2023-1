@@ -37,7 +37,7 @@ export default function ListSymptoms() {
             name="trash-2"
             size={20}
             color="#98AD47"
-            onPress={() => deleteSymptom(item.id)}
+            onPress={() => deleteSymptom(item.id, setSymptomsList)}
           />
         </TouchableOpacity>
       </View>
