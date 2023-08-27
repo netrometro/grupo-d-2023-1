@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   GestureResponderEvent,
+  ScrollView,
 } from "react-native";
 import { instance } from "../../api/axios";
 
@@ -29,13 +30,12 @@ export default function CreateSymptoms() {
   const [symptomMedication, setSymptomMedication] = useState("");
   const [symptomInitialDate, setSymptomInitialDate] = useState("");
   const [symptomFinalDate, setSymptomFinalDate] = useState("");
-  const user_id = "df4f8363-f123-4e3e-ab40-8b4e28f2eee0";
+  const user_id = "917d7905-0e40-410a-a6f9-48d4de4e5b0e";
 
   async function createSymptom(event: GestureResponderEvent) {
     event.preventDefault();
   
     try {
-      // Prepare the data to be sent in the request body
       const newSymptomData = {
         name: symptomName,
         description: symptomDescription,
@@ -45,12 +45,9 @@ export default function CreateSymptoms() {
         user_id: user_id,
       };
   
-      // Send a POST request to the server to create a new symptom
       const response = await instance.post("/symptoms/create", newSymptomData);
   
-      // Check if the request was successful
       if (response.status === 201) {
-        // Clear input fields and fetch updated symptoms list
         setSymptomName("");
         setSymptomDescription("");
         setSymptomMedication("");
@@ -60,22 +57,20 @@ export default function CreateSymptoms() {
         const updatedResponse = await instance.get("/symptoms");
         setSymptomsList(updatedResponse.data);
   
-        // Show success message
         alert("Sintoma cadastrado com sucesso");
         console.log(response.data);
       } else {
-        // Show error message
         alert("Erro ao cadastrar sintoma");
       }
     } catch (err) {
       console.log(err);
-      // Show error message
       alert("Erro ao cadastrar sintoma");
     }
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
+
       <View style={{display: "flex", flexDirection: "row", gap:8, justifyContent: "flex-start"}}>
         <View style={styles.elipse}> 
             <FontAwesome5 name="heartbeat" size={20} color="#98AD47" />
@@ -139,7 +134,8 @@ export default function CreateSymptoms() {
           <Text style={{color: "#fff", fontWeight: "bold",}}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      <View style= {styles.divisor}></View>
+    </ScrollView>
   );
 }
 
@@ -147,8 +143,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    fontFamily: "Inter",
-    paddingBottom: 110,
+    fontFamily: "Helvetica-Oblique",
+    paddingBottom: 50,
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginBottom: 20,
+  },
+
+  divisor:{
+    borderBottomWidth: 1,
+    borderBottomColor: "#98AD47",
+    padding: 20
   },
 
   mainTitle: {
