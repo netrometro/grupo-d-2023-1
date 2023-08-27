@@ -1,1 +1,1 @@
-DELETE  http://127.0.0.1:3333/symptoms/delete/2 HTTP/1.1
+DELETE  https://what-the-health.onrender.com/symptoms/delete/2 HTTP/1.1

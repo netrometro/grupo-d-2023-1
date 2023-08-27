@@ -1,0 +1,1 @@
+GET https://what-the-health.onrender.com/info  HTTP/1.1

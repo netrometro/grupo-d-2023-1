@@ -1,1 +1,1 @@
-GET http://127.0.0.1:3333/symptoms  HTTP/1.1
+GET https://what-the-health.onrender.com/symptoms  HTTP/1.1
