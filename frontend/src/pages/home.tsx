@@ -1,8 +1,8 @@
 import React from "react";
 import { Text, FlatList, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
 import Header from "../components/Header";
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Home() {
 
@@ -11,7 +11,7 @@ export default function Home() {
     const optionsData = [
         { id: "1", icon: "clipboard", text: "IMC", route: "IMC"},
         { id: "2", icon: "fitness", text: "Sintomas", route: "Sintoma"},
-        { id: "3", icon: "water", text: "Água", route: "Água" },
+        { id: "3", icon: "water", text: "Medicamento", route: "Medicamento" },
         { id: "4", icon: "remove-circle", text: "Alergias", route: "Alergia" }
     ];
 

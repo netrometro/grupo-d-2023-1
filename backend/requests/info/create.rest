@@ -1,0 +1,9 @@
+POST https://what-the-health.onrender.com/info/create  HTTP/1.1
+content-type: application/json
+
+{
+    "altura": 1.80, 
+    "peso": 37.0, 
+    "idade": 20,
+    "user_id": "7340db54-07b4-4608-8ad4-c7cf9755566e"
+}

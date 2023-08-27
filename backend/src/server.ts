@@ -3,6 +3,7 @@ import { FastifyInstance } from 'fastify/types/instance';
 import fastifyCors from '@fastify/cors';
 import symptomController from './symptom/symptomController';
 import allergiesController from './allergies/allergiesController';
+import infoController from './info/infoController';
 
 export const fastify: FastifyInstance = Fastify({
   logger: true
@@ -13,17 +14,16 @@ fastify.register(fastifyCors, {
 });
 
 fastify.register(symptomController, allergiesController)
+fastify.register(infoController)
 
 /**
  * Run the server!
  */
 const start = async () => {
   try {
-    const port = process.env.PORT || 3000;
-    const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
-
-    await fastify.listen(port, host)
-    fastify.log.info(`server listening on ${fastify.server.address()}`)
+    await fastify.listen({
+      port: process.env.PORT ? Number(process.env.PORT) : 3333,
+    });
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)

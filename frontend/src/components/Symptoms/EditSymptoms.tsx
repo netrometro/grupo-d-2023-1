@@ -24,7 +24,6 @@ interface Symptoms {
 }
 
 export default function EditSymptom(id: number) {
-    const [symptom, setSymptom] = useState<Symptoms>();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [medication, setMedication] = useState("");

@@ -6,15 +6,16 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { instance } from "../../api/axios";
-import { deleteSymptom } from "./deleteSymptoms"; // Make sure to import the deleteSymptom function
+import { deleteSymptom } from "./deleteSymptoms"; 
+import { useNavigation } from "@react-navigation/native";
 
 export default function ListSymptoms() {
   const [symptomsList, setSymptomsList] = useState([]);
 
   useEffect(() => {
-    // Fetch symptoms list from the server and update the state
     const fetchSymptoms = async () => {
       try {
         const response = await instance.get("/symptoms");
@@ -26,55 +27,75 @@ export default function ListSymptoms() {
     fetchSymptoms();
   }, []);
 
-  const renderSymptomCard = ({ item }) => (
-    <View style={styles.card}>
-      <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-        <TouchableOpacity style={{ marginRight: 10 }}>
-          <Feather name="edit" size={20} color="#98AD47" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Feather
-            name="trash-2"
-            size={20}
-            color="#98AD47"
-            onPress={() => deleteSymptom(item.id)}
-          />
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.label}>{item.name}</Text>
-      <Text style={styles.labelgreen}>Descrição:</Text>
-      <Text style={styles.label}>{item.description}</Text>
-      <Text style={styles.labelgreen}>Medicação:</Text>
-      <Text style={styles.label}>{item.medication}</Text>
-      <View style={styles.row}>
-        <View style={{ flexDirection: "column" }}>
-          <Text style={styles.labelgreen}>Data inicial:</Text>
-          <Text style={styles.label}>{item.startDate}</Text>
-        </View>
-        <View style={{ flexDirection: "column" }}>
-          <Text style={styles.labelgreen}>Data final:</Text>
-          <Text style={styles.label}>{item.endDate}</Text>
-        </View>
-      </View>
-    </View>
-  );
+  const navigate = useNavigation();
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sintomas Registrados:</Text>
-      <FlatList horizontal={true}
-        data={symptomsList}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderSymptomCard}
-      />
-    </View>
-  );
+  
+  if (symptomsList.length === 0) {
+    return(
+      <View style={styles.container}>
+        <Text style={styles.title}>Sintomas Registrados:</Text>
+        <Text style={{color: "#29B1C3", fontSize: 16, textAlign: "center"}}>Nenhum sintoma registrado</Text>
+      </View>
+    );
+
+  }else{
+
+    const renderSymptomCard = ({ item }) => (
+      <View style={styles.card}>
+        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <TouchableOpacity style={{ marginRight: 10 }}>
+            <Feather 
+            name="edit" 
+            size={20} 
+            color="#98AD47"
+            onPress={() =>  navigate.navigate("EditSymptom")} 
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Feather
+              name="trash-2"
+              size={20}
+              color="#98AD47"
+              onPress={() => deleteSymptom(item.id)}
+            />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.label}>{item.name}</Text>
+        <Text style={styles.labelgreen}>Descrição:</Text>
+        <Text style={styles.label}>{item.description}</Text>
+        <Text style={styles.labelgreen}>Medicação:</Text>
+        <Text style={styles.label}>{item.medication}</Text>
+        <View style={styles.row}>
+          <View style={{ flexDirection: "column" }}>
+            <Text style={styles.labelgreen}>Data inicial:</Text>
+            <Text style={styles.label}>{item.startDate}</Text>
+          </View>
+          <View style={{ flexDirection: "column" }}>
+            <Text style={styles.labelgreen}>Data final:</Text>
+            <Text style={styles.label}>{item.endDate}</Text>
+          </View>
+        </View>
+      </View>
+    );
+
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Sintomas Registrados:</Text>
+          <FlatList horizontal={true}
+            data={symptomsList}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={renderSymptomCard}
+          />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    fontFamily: "Helvetica-Oblique",
     padding: 20,
   },
   title: {
