@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-    baseURL: "https://what-the-health.onrender.com",
+    baseURL: process.env.API_URL,
 });
