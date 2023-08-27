@@ -3,7 +3,7 @@ import { Image, Text, View, StyleSheet } from 'react-native';
 
 export default function Header() {
 
-    const logo = require('../assets/logo.png')
+    const logo = require('../../assets/logo.png')
 
     return (
         <View style={HeaderStyles.container}>
