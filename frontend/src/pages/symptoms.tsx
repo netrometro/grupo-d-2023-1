@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import CreateSymptoms from "../components/Symptoms/createSymptoms";
 import ListSymptoms from "../components/Symptoms/listSymptoms";
 import { View, StyleSheet, ScrollView } from "react-native";
