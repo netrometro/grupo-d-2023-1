@@ -1,4 +1,4 @@
-POST http://127.0.0.1:3333/symptoms/create  HTTP/1.1
+POST https://what-the-health.onrender.com/symptoms/create  HTTP/1.1
 content-type: application/json
 
 {
@@ -7,5 +7,5 @@ content-type: application/json
     "medication" : "dorflex",
     "startDate": "2021-04-01",
     "endDate": "2021-05-01",
-    "user_id": "df4f8363-f123-4e3e-ab40-8b4e28f2eee0"
+    "user_id": "7340db54-07b4-4608-8ad4-c7cf9755566e"
 }
