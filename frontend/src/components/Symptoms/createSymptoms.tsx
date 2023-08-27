@@ -141,13 +141,11 @@ export default function CreateSymptoms() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Helvetica-Oblique",
-    paddingBottom: 50,
+    paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
-    marginBottom: 20,
   },
 
   divisor:{

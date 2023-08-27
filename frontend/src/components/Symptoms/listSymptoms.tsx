@@ -28,17 +28,7 @@ export default function ListSymptoms() {
   }, []);
 
   const navigate = useNavigation();
-
   
-  if (symptomsList.length === 0) {
-    return(
-      <View style={styles.container}>
-        <Text style={styles.title}>Sintomas Registrados:</Text>
-        <Text style={{color: "#29B1C3", fontSize: 16, textAlign: "center"}}>Nenhum sintoma registrado</Text>
-      </View>
-    );
-
-  }else{
 
     const renderSymptomCard = ({ item }) => (
       <View style={styles.card}>
@@ -88,12 +78,11 @@ export default function ListSymptoms() {
           />
       </View>
     );
-  }
+  
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Helvetica-Oblique",
     padding: 20,
@@ -120,7 +109,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 16,
     height: "auto",
-    marginBottom: 10,
     marginRight: 15,
   },
   row: {
