@@ -200,6 +200,87 @@ async function allergyController(fastify2) {
   });
 }
 
+// src/info/infoController.ts
+var import_zod2 = require("zod");
+async function infoController(fastify2) {
+  fastify2.get("/info", async (request, reply) => {
+    try {
+      const getinfo = await prisma.info.findMany({});
+      reply.send(getinfo);
+    } catch (error) {
+      console.error(error);
+      reply.status(400).send({ message: "Erro ao buscar informa\xE7\xE3o!" });
+    }
+  });
+  fastify2.get("/info/count", async (request, reply) => {
+    try {
+      const countinfo = await prisma.info.count();
+      reply.send(countinfo);
+    } catch (error) {
+      console.error(error);
+      reply.status(400).send({ message: "Erro ao buscar informa\xE7\xF5es!" });
+    }
+  });
+  const infoIdParam = import_zod2.z.object({
+    id: import_zod2.z.number()
+  });
+  const createinfoschema = import_zod2.z.object({
+    altura: import_zod2.z.number().min(0),
+    peso: import_zod2.z.number().min(0),
+    idade: import_zod2.z.number().min(0),
+    user_id: import_zod2.z.string()
+  });
+  fastify2.post("/info/create", async (request, reply) => {
+    try {
+      const { altura, peso, idade, user_id } = createinfoschema.parse(request.body);
+      const createdinfo = await prisma.info.create({
+        data: {
+          altura,
+          peso,
+          idade,
+          user: { connect: { id: user_id } }
+        }
+      });
+      reply.status(201).send({ message: "informa\xE7\xE3o criado com sucesso!" });
+      console.log(`informa\xE7\xE3o criado: ${JSON.stringify(createdinfo)}`);
+    } catch (error) {
+      console.error(error);
+      reply.status(400).send({ message: "Erro ao criar informa\xE7\xE3o!" });
+    }
+  });
+  fastify2.put("/info/update/:id", async (request, reply) => {
+    const { altura, peso, idade } = createinfoschema.parse(request.body);
+    try {
+      const { id } = infoIdParam.parse(request.params);
+      const updatedinfo = await prisma.info.update({
+        where: { id },
+        data: {
+          altura,
+          peso,
+          idade
+        }
+      });
+      reply.status(200).send({ message: "informa\xE7\xE3o atualizado com sucesso!" });
+      console.log(`informa\xE7\xE3o atualizado: ${JSON.stringify(updatedinfo)}`);
+    } catch (error) {
+      console.error(error);
+      reply.status(400).send({ message: "Erro ao atualizar informa\xE7\xE3o!" });
+    }
+  });
+  fastify2.delete("/info/delete/:id", async (request, reply) => {
+    try {
+      const { id } = infoIdParam.parse(request.params);
+      await prisma.info.delete({
+        where: { id: Number(id) }
+      });
+      reply.status(200).send({ message: "informa\xE7\xE3o deletado com sucesso!" });
+    } catch (error) {
+      console.error(error);
+      reply.status(400).send({ message: "Erro ao deletar informa\xE7\xE3o!" });
+    }
+  });
+}
+
 // src/server.ts
 var fastify = (0, import_fastify.default)({
   logger: true
@@ -208,12 +289,12 @@ fastify.register(import_cors.default, {
   origin: "*"
 });
 fastify.register(symptomController, allergyController);
+fastify.register(infoController);
 var start = async () => {
   try {
-    const port = process.env.PORT || 3e3;
-    const host = "RENDER" in process.env ? `0.0.0.0` : `localhost`;
-    await fastify.listen(port, host);
-    fastify.log.info(`server listening on ${fastify.server.address()}`);
+    await fastify.listen({
+      port: process.env.PORT ? Number(process.env.PORT) : 3333
+    });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);

@@ -11,7 +11,7 @@ export default function Home() {
     const optionsData = [
         { id: "1", icon: "clipboard", text: "IMC", route: "IMC"},
         { id: "2", icon: "fitness", text: "Sintomas", route: "Sintoma"},
-        { id: "3", icon: "water", text: "Água", route: "Água" },
+        { id: "3", icon: "water", text: "Medicamento", route: "Medicamento" },
         { id: "4", icon: "remove-circle", text: "Alergias", route: "Alergia" }
     ];
 

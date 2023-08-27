@@ -29,45 +29,7 @@ export default function ListSymptoms() {
 
   const navigate = useNavigation();
 
-
-  const renderSymptomCard = ({ item }) => (
-    <View style={styles.card}>
-      <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-        <TouchableOpacity style={{ marginRight: 10 }}>
-          <Feather 
-          name="edit" 
-          size={20} 
-          color="#98AD47"
-          onPress={() =>  navigate.navigate("EditSymptom")} 
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Feather
-            name="trash-2"
-            size={20}
-            color="#98AD47"
-            onPress={() => deleteSymptom(item.id)}
-          />
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.label}>{item.name}</Text>
-      <Text style={styles.labelgreen}>Descrição:</Text>
-      <Text style={styles.label}>{item.description}</Text>
-      <Text style={styles.labelgreen}>Medicação:</Text>
-      <Text style={styles.label}>{item.medication}</Text>
-      <View style={styles.row}>
-        <View style={{ flexDirection: "column" }}>
-          <Text style={styles.labelgreen}>Data inicial:</Text>
-          <Text style={styles.label}>{item.startDate}</Text>
-        </View>
-        <View style={{ flexDirection: "column" }}>
-          <Text style={styles.labelgreen}>Data final:</Text>
-          <Text style={styles.label}>{item.endDate}</Text>
-        </View>
-      </View>
-    </View>
-  );
-
+  
   if (symptomsList.length === 0) {
     return(
       <View style={styles.container}>
@@ -77,6 +39,45 @@ export default function ListSymptoms() {
     );
 
   }else{
+
+    const renderSymptomCard = ({ item }) => (
+      <View style={styles.card}>
+        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <TouchableOpacity style={{ marginRight: 10 }}>
+            <Feather 
+            name="edit" 
+            size={20} 
+            color="#98AD47"
+            onPress={() =>  navigate.navigate("EditSymptom")} 
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Feather
+              name="trash-2"
+              size={20}
+              color="#98AD47"
+              onPress={() => deleteSymptom(item.id)}
+            />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.label}>{item.name}</Text>
+        <Text style={styles.labelgreen}>Descrição:</Text>
+        <Text style={styles.label}>{item.description}</Text>
+        <Text style={styles.labelgreen}>Medicação:</Text>
+        <Text style={styles.label}>{item.medication}</Text>
+        <View style={styles.row}>
+          <View style={{ flexDirection: "column" }}>
+            <Text style={styles.labelgreen}>Data inicial:</Text>
+            <Text style={styles.label}>{item.startDate}</Text>
+          </View>
+          <View style={{ flexDirection: "column" }}>
+            <Text style={styles.labelgreen}>Data final:</Text>
+            <Text style={styles.label}>{item.endDate}</Text>
+          </View>
+        </View>
+      </View>
+    );
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Sintomas Registrados:</Text>
