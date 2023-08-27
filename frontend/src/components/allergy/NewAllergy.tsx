@@ -1,126 +1,77 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { instance } from '../../api/axios';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import { instance } from "../../api/axios";
 
 export default function NewAllergy() {
-    const [allergyData, setAllergyData] = useState([
-        { label: "Nome da alergia", key: "name", value: "" },
-        { label: "Tratamento", key: "treatment", value: "" },
-        { label: "Descrição", key: "description", value: "" },
-    ]);
+    const [name, setName] = useState("");
+    const [treatment, setTreatment] = useState("");
+    const [description, setDescription] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleInputChange = (key: string, value: string) => {
-        const updatedAllergyData = allergyData.map(item => {
-            if (item.key === key) {
-                return { ...item, value };
-            }
-            return item;
-        });
-        setAllergyData(updatedAllergyData);
-    };
-
-    const handleAddAllergy = async () => {
+    const handleCreateAllergy = async () => {
         try {
-            const allergyToAdd = {};
-            allergyData.forEach(item => {
-                allergyToAdd[item.key] = item.value;
+            setIsLoading(true);
+            const response = await instance.post("/allergies/create", {
+                name,
+                treatment,
+                description,
+                user_id: "1c6f9bfc-eb8f-41c1-990c-acc3597281c2",
             });
-            allergyToAdd.user_id = "6922fb9a-695a-446a-9cdf-3bdd7a8450bf";
-
-            const response = await instance.post("/allergies/create", allergyToAdd);
-            console.log(response.data);
-
-            if (response.data.id === "6922fb9a-695a-446a-9cdf-3bdd7a8450bf") {
-                console.log("Alergia criada com sucesso usando o ID desejado!");
-            } else {
-                console.log("Alergia criada, mas o ID não corresponde ao esperado.");
-            }
+            setIsLoading(false);
+            Alert.alert("Sucesso", response.data.message);
         } catch (error) {
+            setIsLoading(false);
+            Alert.alert("Erro", "Ocorreu um erro ao criar a alergia.");
             console.error(error);
         }
     };
 
-    function renderInputItem({ item }) {
-        return (
-            <View style={allergyStyles.inputItem}>
-                <Text style={allergyStyles.inputLabel}>{item.label}</Text>
-                <TextInput
-                    style={allergyStyles.inputField}
-                    placeholder={item.label}
-                    value={item.value}
-                    onChangeText={(text) => handleInputChange(item.key, text)} />
-            </View>
-        );
-    }
-
     return (
-        <View style={allergyStyles.container}>
-            <Text style={allergyStyles.title}>Cadastrar alergia</Text>
-            <FlatList
-                data={allergyData}
-                keyExtractor={(item) => item.key}
-                renderItem={renderInputItem}
-                style={allergyStyles.flatlist}
+        <View style={styles.container}>
+            <Text style={styles.title}>Cadastrar Alergia</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Nome da alergia"
+                value={name}
+                onChangeText={setName}
             />
-            <TouchableOpacity
-                style={allergyStyles.button}
-                onPress={handleAddAllergy}
-            >
-                <Text style={allergyStyles.textButton}>Salvar</Text>
-            </TouchableOpacity>
-
+            <TextInput
+                style={styles.input}
+                placeholder="Tratamento"
+                value={treatment}
+                onChangeText={setTreatment}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Descrição"
+                value={description}
+                onChangeText={setDescription}
+            />
+            <Button
+                title="Criar Alergia"
+                onPress={handleCreateAllergy}
+                disabled={isLoading}
+                color={"#98AD47"}
+            />
         </View>
     );
 }
 
-
-const allergyStyles = StyleSheet.create({
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+    },
     title: {
         fontSize: 20,
         fontWeight: "bold",
-        marginBottom: 10,
-        color: '#98AD47',
-        fontFamily: 'Helvetica-Oblique',
+        marginBottom: 20,
     },
-    container: {
-        flex: 1,
-        margin: 20,
-        alignItems: 'center',
-
+    input: {
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 15,
     },
-    inputItem: {
-        marginBottom: 10,
-    },
-    inputLabel: {
-        fontFamily: 'Helvetica-Oblique',
-        marginBottom: 5,
-        fontSize: 12,
-        fontWeight: "400",
-        marginLeft: 15
-
-    },
-    inputField: {
-        fontFamily: 'Helvetica-Oblique',
-        height: 50,
-        width: 350,
-        backgroundColor: '#e6e6e6',
-        borderRadius: 99,
-        paddingHorizontal: 15
-    },
-    button: {
-        height: 40,
-        width: 75,
-        backgroundColor: '#98AD47',
-        borderRadius: 99,
-        alignItems: 'center',
-        marginLeft: 250,
-    },
-    textButton: {
-        color: '#fff',
-        fontFamily: 'Helvetica-Oblique',
-        paddingTop: 13
-    },
-    flatlist: {
-        marginBottom: 5
-    }
 });
