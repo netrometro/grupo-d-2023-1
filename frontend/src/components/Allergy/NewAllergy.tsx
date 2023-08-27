@@ -9,7 +9,7 @@ export default function NewAllergy() {
         { label: "Descrição", key: "description", value: "" },
     ]);
 
-    const handleInputChange = (key, value) => {
+    const handleInputChange = (key: string, value: string) => {
         const updatedAllergyData = allergyData.map(item => {
             if (item.key === key) {
                 return { ...item, value };

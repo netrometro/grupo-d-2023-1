@@ -1,0 +1,23 @@
+GET http://127.0.0.1:3333/users
+
+GET http://127.0.0.1:3333/users/count
+
+POST http://127.0.0.1:3333/users/create  HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Beatriz",
+    "email": "biabiasouza17@gmail.com",
+    "password": "bibi123"
+}
+
+PUT http://127.0.0.1:3333/users/update/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Beatriz Silva",
+    "email": "souzaxbia@outlook.com",
+    "password": "bia1234"
+}
+
+DELETE  http://127.0.0.1:3333/symptoms/users/1 HTTP/1.1

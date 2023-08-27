@@ -6,7 +6,7 @@ import BMI from './src/pages/BMI';
 import Allergy from './src/pages/Allergy';
 import Symptoms from './src/pages/symptoms';
 import Water from './src/pages/Water';
-import Home from './src/pages/Home';
+import Home from './src/pages/home';
 
 const Stack = createStackNavigator();
 
