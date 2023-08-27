@@ -78,14 +78,14 @@ export default function ListSymptoms() {
 
   }else{
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.title}>Sintomas Registrados:</Text>
           <FlatList horizontal={true}
             data={symptomsList}
             keyExtractor={(item) => item.id.toString()}
             renderItem={renderSymptomCard}
           />
-      </ScrollView>
+      </View>
     );
   }
 }

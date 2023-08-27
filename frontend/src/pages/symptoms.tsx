@@ -8,8 +8,8 @@ export default function Symptoms() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Header />
-        <CreateSymptoms />
-        <ListSymptoms />
+      <CreateSymptoms />
+      <ListSymptoms />
     </ScrollView>
   );
 }
