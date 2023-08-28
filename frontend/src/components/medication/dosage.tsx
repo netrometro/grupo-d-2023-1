@@ -55,8 +55,9 @@ export default function Dosage() {
           <View style={styles.elipse}> 
               <FontAwesome5 name="pills" size={20} color="#98AD47" />
           </View>
-          <Text style={styles.mainTitle}> Dosagem de medicamento </Text>
+          <Text style={styles.mainTitle}> Medicamentos </Text>
         </View>
+        <Text style={styles.title}>Dosagem de medicamento</Text>
         <Text style={styles.label}>
           Para calcular a dosagem de um medicamento é necessário saber a dose que deve
           ser administrada por quilo do paciente.
@@ -106,6 +107,7 @@ const styles = StyleSheet.create({
       fontWeight: "normal",
       marginTop: 8,
       textAlign: "center",
+      marginBottom: 10,
     },
   
     title: {
@@ -144,6 +146,8 @@ const styles = StyleSheet.create({
       borderRadius: 19,
       backgroundColor: "#D9D9D9",
       paddingStart: 10,
+      display: "flex",
+      alignItems: "center",
       fontSize: 12,
     },
     bigInput: {
