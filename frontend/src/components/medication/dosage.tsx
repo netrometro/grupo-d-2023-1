@@ -39,12 +39,18 @@ export default function Dosage() {
 
   const calculateDosage = () => {
     const result = parseFloat(dosage) * weight;
+    if (isNaN(result)) {
+      return 0;
+    }
     return result;
   }
 
   const parseToMl = () => {
     const result = parseFloat(dosage) * weight;
     const ml = result / 100;
+    if (isNaN(ml)) {
+      return 0;
+    }
     return ml;
   }
 
