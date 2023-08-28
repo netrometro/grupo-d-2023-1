@@ -1,18 +1,31 @@
 import React from "react";
-import {Text, View, TextInput, StyleSheet, TouchableOpacity} from 'react-native'
+import {Text, View, TextInput, StyleSheet} from 'react-native'
+import { FontAwesome5 } from '@expo/vector-icons';
 import { useState, useEffect  } from "react";
 import { instance } from "../../api/axios";
 
 export default function Dosage() {
-  const [dosage, setDosage] = useState(0);
-  const [infoList, setInfoList] = useState([]);
+  const [dosage, setDosage] = useState("");
+  const [info, setInfo] = useState(null);
   const [weight, setWeight] = useState(0);
+
+  const user_id = "7340db54-07b4-4608-8ad4-c7cf9755566e";
 
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await instance.get("/info");
-        setInfoList(response.data);
+        const response = await instance.get(`/info?user_id=${user_id}`,{
+          params: {
+            _sort: 'created_at:desc',
+            limit: 1,
+          },
+        }); 
+        const info = response.data[0];
+        setInfo(info);
+        if (info) {
+          const userWeight = info.peso
+          setWeight(userWeight);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -20,41 +33,57 @@ export default function Dosage() {
     fetchInfo();
   }, []);
 
+  const handleChange = (number: string) => {
+    setDosage(number);
+  }
+
   const calculateDosage = () => {
-    const dosage = infoList[0].dosage;
-    const weight = infoList[0].weight;
-    const result = parseFloat(dosage) * parseFloat(weight);
-    setDosage(result);
-  };
-  
+    const result = parseFloat(dosage) * weight;
+    return result;
+  }
+
+  const parseToMl = () => {
+    const result = parseFloat(dosage) * weight;
+    const ml = result / 100;
+    return ml;
+  }
+
   return (
     <View style={styles.container}>
-        <Text style={styles.mainTitle}>Dosagem de Medicamentos</Text>
-        <Text style={styles.label}> Dose por kg (mg/kg)</Text>
-        <TextInput
-            style={styles.input}
-            placeholder="0,0/kg"
-            value={dosage.toString()}
-            onChangeText={(value) => setDosage(parseFloat(value))}
-        />
-        <Text style={styles.label}> Peso (kg)</Text>
-        <TextInput
-            style={styles.input}
-            value={weight.toString()}
-            onChangeText={(value) => setWeight(parseFloat(value))}
-        />
-        <View style={{ display: "flex", flexDirection: "column", alignContent: "flex-end" }}>
-            <TouchableOpacity style={styles.button} onPress={() => calculateDosage}>
-              <Text style={{color: "#fff", fontWeight: "bold",}}>Calcular</Text>
-            </TouchableOpacity>
+      <View >
+        <View style={{display: "flex", flexDirection: "row", gap:8, justifyContent: "flex-start"}}>
+          <View style={styles.elipse}> 
+              <FontAwesome5 name="pills" size={20} color="#98AD47" />
+          </View>
+          <Text style={styles.mainTitle}> Dosagem de medicamento </Text>
         </View>
-      <Text style={styles.label}> Dose (mg)</Text>
-      <Text style={styles.labelgreen}> {dosage} </Text>
-      <View style={styles.divisor}></View>
-        
+        <Text style={styles.label}>
+          Para calcular a dosagem de um medicamento é necessário saber a dose que deve
+          ser administrada por quilo do paciente.
+          Por exemplo: Se na descrição da bula do medicamento 
+          estiver indicando que a prescrição deve ser 100mg/Kg/dia quer dizer que em um 
+          dia deve ser administrado 100 mg do medicamento para cada quilo do paciente. 
+        </Text>
+        <Text style={styles.label}>Peso</Text>
+        <Text style={styles.input}>{weight}</Text>
+        <Text style={styles.label}>Dose (mg)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite a dosagem"
+          keyboardType="numeric"
+          onChangeText={ (number) => handleChange(number)}
+        />
+        <View style={styles.divisor}></View>
+        <Text style={styles.label}>Resultado</Text>
+        <Text style={styles.labelgreen}>{calculateDosage()} mg</Text>
+        <Text style={styles.label}>Resultado em ml</Text>
+        <Text style={styles.labelgreen}>{parseToMl()} ml</Text>
+      </View>
     </View>
   );
 }
+  
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
