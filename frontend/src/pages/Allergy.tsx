@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Text, View, StyleSheet} from 'react-native'
-import Header from "../components/Header";
 import { Ionicons } from '@expo/vector-icons';
-import NewAllergy from "../components/allergy/NewAllergy";
-import GetAlergy from "../components/allergy/GetAllergy";
+import NewAllergy from "../components/Allergy/NewAllergy";
+import GetAlergy from "../components/Allergy/GetAllergy";
+import { instance } from "../api/axios";
+
 
 export default function Allergy() {
+
   return (
     <View style={allergyStyles.container}>
-      <Header/>
       <View style={allergyStyles.titleBox}>
         <View style={allergyStyles.icon}>
           <Ionicons name="remove-circle" size={33} color="#98AD47" style={allergyStyles.allergyIcon}/>
