@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import CreateSymptoms from "../components/Symptoms/createSymptoms";
 import ListSymptoms from "../components/Symptoms/listSymptoms";
 import { View, StyleSheet } from "react-native";
+import React from "react";
 
 export default function Symptoms() {
   return (
