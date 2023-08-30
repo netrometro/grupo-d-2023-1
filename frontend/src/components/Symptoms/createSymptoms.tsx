@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 import { instance } from "../../api/axios";
+import React from "react";
 
 interface Symptoms {
   id: number;

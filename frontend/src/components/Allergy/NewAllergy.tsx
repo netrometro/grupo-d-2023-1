@@ -8,7 +8,18 @@ export default function NewAllergy() {
     const [description, setDescription] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
+    const handleInputChange = (key: string, value: string) => {
+        const updatedAllergyData = allergyData.map(item => {
+            if (item.key === key) {
+                return { ...item, value };
+            }
+            return item;
+        });
+        setAllergyData(updatedAllergyData);
+    };
+
     const handleCreateAllergy = async () => {
+
         try {
             setIsLoading(true);
             const response = await instance.post("/allergies/create", {
