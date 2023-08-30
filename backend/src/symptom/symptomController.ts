@@ -10,7 +10,7 @@ export default async function symptomController(fastify: FastifyInstance) {
 
             const getSymptom = await prisma.symptom.findMany({
             });
-            reply.send(getSymptom);
+            reply.status(200).send(getSymptom);
         
         } catch (error) {
             
