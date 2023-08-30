@@ -11,15 +11,16 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  alergies  Alergy[]
-  info      Info[]
-  symptoms  Symptom[]
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String
+  password    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  alergies    Alergy[]
+  info        Info[]
+  symptoms    Symptom[]
+  medications Medication[]
 }
 
 model Info{
@@ -34,23 +35,35 @@ model Info{
 }
 
 model Symptom{
-  id        Int   @id @default(autoincrement())
-  name      String
+  id          Int   @id @default(autoincrement())
+  name        String
   description String?
-  medication String?
-  startDate String
-  endDate String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user_id   String   
-  user      User     @relation(fields: [user_id], references: [id])
+  medication  String?
+  startDate   String
+  endDate     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user_id     String   
+  user        User     @relation(fields: [user_id], references: [id])
 }
 
 model Alergy {
+  id          Int   @id @default(autoincrement())
+  name        String
+  treatment   String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user_id     String   
+  user        User     @relation(fields: [user_id], references: [id])
+}
+
+model Medication {
   id        Int   @id @default(autoincrement())
   name      String
-  treatment  String?
-  description String?
+  intake    Boolean
+  dose      Float
+  frequency Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user_id   String   

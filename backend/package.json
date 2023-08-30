@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/node": "^20.5.0",
     "prisma": "^5.1.1",
+    "tsup": "^7.2.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   },
@@ -27,5 +28,4 @@
     "fastify": "^4.21.0",
     "zod": "^3.22.2"
   }
-  
 }

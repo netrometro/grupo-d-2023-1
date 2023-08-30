@@ -1,8 +1,8 @@
 import React from "react";
 import {Text} from 'react-native'
 
-export default function Water() {
+export default function UpdateAllergy() {
   return (
-    <Text>tela de água</Text>
+    <Text>Update</Text>
   );
 }

@@ -1,18 +1,18 @@
 import React from "react";
 import { Text, FlatList, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
 import Header from "../components/Header";
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function Home() {
 
     const navigation = useNavigation(); 
 
     const optionsData = [
-        { id: "1", icon: "clipboard", text: "IMC", route: "IMC"},
-        { id: "2", icon: "fitness", text: "Sintomas", route: "Sintoma"},
-        { id: "3", icon: "water", text: "Água", route: "Água" },
-        { id: "4", icon: "remove-circle", text: "Alergias", route: "Alergia" }
+        { id: "1", icon: "weight", text: "IMC", route: "IMC"},
+        { id: "2", icon: "heartbeat", text: "Sintomas", route: "Sintoma"},
+        { id: "3", icon: "pills", text: "Medicamento", route: "Medicamento" },
+        { id: "4", icon: "minus-circle", text: "Alergias", route: "Alergia" }
     ];
 
     const renderOption = ({ item }) => (
@@ -21,7 +21,7 @@ export default function Home() {
             onPress={() => navigation.navigate(item.route)}
         >
             <View style={homeStyles.optionIcon}>
-                <Ionicons name={item.icon} size={33} color="#98AD47" />
+                <FontAwesome5 name={item.icon} size={33} color="#98AD47" />
             </View>
             <Text style={homeStyles.optionText}>{item.text}</Text>
         </TouchableOpacity>
