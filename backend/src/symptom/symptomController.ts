@@ -3,6 +3,10 @@ import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 
 export default async function symptomController(fastify: FastifyInstance) {
+
+    fastify.get('/', (request, reply) => {
+        reply.status(200)
+    })
     
     fastify.get('/symptoms', async (request, reply) => {
         
