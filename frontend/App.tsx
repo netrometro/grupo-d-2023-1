@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BMI from './src/pages/BMI';
 import Allergy from './src/pages/Allergy';
 import Symptoms from './src/pages/symptoms';
-import Home from './src/pages/home';
+import Home from './src/pages/Home';
 import Medication from './src/pages/Medication';
 
 const Stack = createStackNavigator();
