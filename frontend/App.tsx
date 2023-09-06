@@ -5,6 +5,7 @@ import Home from './src/pages/Home';
 import BMI from './src/pages/BMI';
 import Allergy from './src/pages/Allergy';
 import Symptoms from './src/pages/symptoms';
+import Checklist from './src/pages/Checklist';
 import Medication from './src/pages/Medication';
 import Register from './src/pages/Register';
 import NewsPage from './src/pages/NewsPage';
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name="Medicamento" component={Medication} />
         <Stack.Screen name="Registro" component={Register} />
         <Stack.Screen name="Notícias" component={NewsPage} />
+        <Stack.Screen name="Checklist" component={Checklist} />
       </Stack.Navigator>
     </NavigationContainer>
   );
