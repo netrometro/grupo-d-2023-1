@@ -1,12 +1,7 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import CreateUser from "../components/User/CreateUser";
-=======
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
->>>>>>> Stashed changes
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +24,6 @@ const Register = () => {
 
   return (
     <View style={styles.container}>
-<<<<<<< Updated upstream
       <Text>Digite seu e-mail...</Text>
       <View style={styles.box}></View>
 
@@ -38,13 +32,6 @@ const Register = () => {
 
       <Text>Confirme sua senha...</Text>
       <View style={styles.box}></View>
-    </View>
-    
-  )};
-=======
-      <Image source={require('./logo.png')} style={styles.logo} />
->>>>>>> Stashed changes
-
       <TextInput
         placeholder="E-mail"
         style={styles.input}
@@ -82,14 +69,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#29B1C3',
   },
-<<<<<<< Updated upstream
   box: {
     width: 100,
     height: 100,
     backgroundColor: '#98AD47',
   },
-});
-=======
   logo: {
     width: 110,
     height: 110,
@@ -120,4 +104,3 @@ const styles = StyleSheet.create({
 export default Register;
 
 
->>>>>>> Stashed changes
