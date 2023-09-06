@@ -89,10 +89,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Helvetica-Oblique",
-    paddingBottom: 50,
+    paddingBottom: 80,
     paddingLeft: 20,
     paddingRight: 20,
-    marginTop: 20,
+    marginTop: 100,
   },
 
   divisor: {
@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     fontSize: 12,
+    flexShrink: 0,
   },
   bigInput: {
     marginBottom: 10,
