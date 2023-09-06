@@ -15,7 +15,7 @@ export default function NewAllergy() {
                 name,
                 treatment,
                 description,
-                user_id: "1c6f9bfc-eb8f-41c1-990c-acc3597281c2",
+                user_id: "7340db54-07b4-4608-8ad4-c7cf9755566e",
             });
             setIsLoading(false);
             Alert.alert("Sucesso", response.data.message);

@@ -8,7 +8,7 @@ export default function GetBMI() {
     const [statusText, setStatusText] = useState("");
     const [statusDescription, setStatusDescription] = useState("");
 
-    const userId = "1c6f9bfc-eb8f-41c1-990c-acc3597281c2"
+    const userId = "7340db54-07b4-4608-8ad4-c7cf9755566e"
 
     useEffect(() => {
         const fetchLatestInfo = async () => {

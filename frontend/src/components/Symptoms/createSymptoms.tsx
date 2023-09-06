@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 import { instance } from "../../api/axios";
+import React from "react";
 
 interface Symptoms {
   id: number;
@@ -30,7 +31,7 @@ export default function CreateSymptoms() {
   const [symptomMedication, setSymptomMedication] = useState("");
   const [symptomInitialDate, setSymptomInitialDate] = useState("");
   const [symptomFinalDate, setSymptomFinalDate] = useState("");
-  const user_id = "1c6f9bfc-eb8f-41c1-990c-acc3597281c2";
+  const user_id = "7340db54-07b4-4608-8ad4-c7cf9755566e";
 
   async function createSymptom(event: GestureResponderEvent) {
     event.preventDefault();
