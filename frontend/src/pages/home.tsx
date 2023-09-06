@@ -9,10 +9,18 @@ export default function Home() {
     const navigation = useNavigation(); 
 
     const optionsData = [
+<<<<<<< Updated upstream
         { id: "1", icon: "weight", text: "IMC", route: "IMC"},
         { id: "2", icon: "heartbeat", text: "Sintomas", route: "Sintoma"},
         { id: "3", icon: "pills", text: "Medicamento", route: "Medicamento" },
         { id: "4", icon: "minus-circle", text: "Alergias", route: "Alergia" }
+=======
+        { id: "1", icon: "clipboard", text: "IMC", route: "IMC"},
+        { id: "2", icon: "fitness", text: "Sintomas", route: "Sintoma"},
+        { id: "3", icon: "water", text: "Água", route: "Água" },
+        { id: "4", icon: "remove-circle", text: "Alergias", route: "Alergia" }
+        { id: "5", icon: "checkbox-outline", text: "Register", route: "Register" }
+>>>>>>> Stashed changes
     ];
 
     const renderOption = ({ item }) => (
