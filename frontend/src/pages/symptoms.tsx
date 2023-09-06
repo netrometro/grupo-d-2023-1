@@ -1,8 +1,7 @@
 import CreateSymptoms from "../components/Symptoms/createSymptoms";
 import ListSymptoms from "../components/Symptoms/listSymptoms";
-import { View, StyleSheet } from "react-native";
-import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
+import React from "react";
 import Header from "../components/Header";
 
 export default function Symptoms() {

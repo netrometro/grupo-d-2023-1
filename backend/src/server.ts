@@ -4,6 +4,7 @@ import fastifyCors from '@fastify/cors';
 import symptomController from './symptom/symptomController';
 import allergiesController from './allergies/allergiesController';
 import infoController from './info/infoController';
+import userController from './user/userController';
 
 export const fastify: FastifyInstance = Fastify({
   logger: true
