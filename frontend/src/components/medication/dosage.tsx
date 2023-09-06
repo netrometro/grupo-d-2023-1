@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
       paddingBottom: 50,
       paddingLeft: 20,
       paddingRight: 20,
-      marginBottom: 20,
+      marginBottom: 50,
     },
   
     divisor:{
