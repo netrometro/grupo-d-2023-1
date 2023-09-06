@@ -38,7 +38,7 @@ export default function ListSymptoms() {
             name="edit" 
             size={20} 
             color="#98AD47"
-            onPress={() =>  navigate.navigate("EditSymptom")} 
+            onPress={() =>  navigate.navigate("EditSymptoms")} 
             />
           </TouchableOpacity>
           <TouchableOpacity>
