@@ -6,6 +6,7 @@ import Allergy from './src/pages/Allergy';
 import Symptoms from './src/pages/symptoms';
 import Home from './src/pages/Home';
 import Medication from './src/pages/Medication';
+import NewsPage from './src/pages/NewsPage';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Alergia" component={Allergy} />
         <Stack.Screen name="Sintoma" component={Symptoms} />
         <Stack.Screen name="Medicamento" component={Medication} />
+        <Stack.Screen name="Notícias" component={NewsPage}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
