@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { instance } from "../../api/axios";
+import { props } from "../props";
 
-export default function GetBMI() {
+export default function GetBMI({ fontSize }: props) {
     const [latestInfo, setLatestInfo] = useState(null);
     const [bmi, setBMI] = useState(null);
     const [statusText, setStatusText] = useState("");
@@ -70,21 +71,21 @@ export default function GetBMI() {
 
     return (
         <View style={bmiStyles.container}>
-            <Text style={bmiStyles.title}>Índice de Massa Corporal (IMC)</Text>
+            <Text style={[bmiStyles.title, {fontSize: fontSize + 4}]}>Índice de Massa Corporal (IMC)</Text>
             {latestInfo ? (
                 <View style={bmiStyles.infoContainer}>
-                    <Text>Peso: {latestInfo.peso} kg</Text>
-                    <Text>Altura: {latestInfo.altura} cm</Text>
+                    <Text style={{fontSize: fontSize - 2}}>Peso: {latestInfo.peso} kg</Text>
+                    <Text style={{fontSize: fontSize - 2}}>Altura: {latestInfo.altura} cm</Text>
                     {bmi !== null && (
                         <>
-                            <Text style={bmiStyles.bmiText}>IMC: {bmi}</Text>
-                            <Text style={bmiStyles.statusText}>Status: {statusText}</Text>
-                            <Text style={bmiStyles.statusDescription}>{statusDescription}</Text>
+                            <Text style={[bmiStyles.bmiText, {fontSize: fontSize + 2}]}>IMC: {bmi}</Text>
+                            <Text style={[bmiStyles.statusText, {fontSize: fontSize}]}>Status: {statusText}</Text>
+                            <Text style={[bmiStyles.statusDescription, {fontSize: fontSize - 2}]}>{statusDescription}</Text>
                         </>
                     )}
                 </View>
             ) : (
-                <Text>Não há informações disponíveis.</Text>
+                <Text style={{fontSize: fontSize}}>Não há informações disponíveis.</Text>
             )}
         </View>
     );
