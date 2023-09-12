@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { instance } from "../../api/axios";
-import { props } from "../props";
 
-export default function NewAllergy({ fontSize }: props) {
+export default function NewAllergy() {
     const [name, setName] = useState("");
     const [treatment, setTreatment] = useState("");
     const [description, setDescription] = useState("");
@@ -29,21 +28,21 @@ export default function NewAllergy({ fontSize }: props) {
 
     return (
         <View style={styles.container}>
-            <Text style={[styles.title, {fontSize:fontSize + 4}]}>Cadastrar Alergia</Text>
+            <Text style={styles.title}>Cadastrar Alergia</Text>
             <TextInput
-                style={[styles.input, {fontSize:fontSize}]}
+                style={styles.input}
                 placeholder="Nome da alergia"
                 value={name}
                 onChangeText={setName}
             />
             <TextInput
-                style={[styles.input, {fontSize:fontSize}]}
+                style={styles.input}
                 placeholder="Tratamento"
                 value={treatment}
                 onChangeText={setTreatment}
             />
             <TextInput
-                style={[styles.input, {fontSize:fontSize}]}
+                style={styles.input}
                 placeholder="Descrição"
                 value={description}
                 onChangeText={setDescription}
