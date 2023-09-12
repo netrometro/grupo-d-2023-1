@@ -2,21 +2,38 @@ import React from 'react';
 import News from '../components/News/News';
 import { View, Text, StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import FontSize from '../components/font/font';
+import { useState } from 'react';
+import Header from '../components/Header';
 
 export default function NewsPage() {
     const newsPerPage = 5;
 
+    const [fontSize, setFontSize] = useState(16);
+
+    const increaseFontSize = () => {
+      setFontSize(fontSize + 2);
+    };
+  
+    const decreaseFontSize = () => {
+      setFontSize(fontSize - 2);
+    };
+
     return (
-        <View style={styles.container}>
-            <View style={styles.titleBox}>
-                <View style={styles.icon}>
-                    <FontAwesome5 name="newspaper" size={25} color="#98AD47" style={styles.newsIcon}/>
+        <View>
+            <Header />
+            <FontSize onDecreaseFontSize={decreaseFontSize} onIncreaseFontSize={increaseFontSize} fontSize={fontSize}/>
+            <View style={styles.container}>
+                <View style={styles.titleBox}>
+                    <View style={styles.icon}>
+                        <FontAwesome5 name="newspaper" size={25} color="#98AD47" style={styles.newsIcon}/>
+                    </View>
+                    <Text style={[styles.title, {fontSize: fontSize}]}>Alergias</Text>
+                    <View style={styles.borderLine}/>
                 </View>
-                <Text style={styles.title}>Alergias</Text>
-                <View style={styles.borderLine}/>
+                <Text style={[styles.subtitle, {fontSize: fontSize}]}>Notícias Sobre Sintomas e Alergias</Text>
+                <News newsPerPage={newsPerPage} fontSize={fontSize}/>
             </View>
-            <Text style={styles.subtitle}>Notícias Sobre Sintomas e Alergias</Text>
-            <News newsPerPage={newsPerPage} />
         </View>
     );
 }

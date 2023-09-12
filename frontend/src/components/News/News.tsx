@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, Button, TouchableOpacity, Linking } from 'react-native';
 import { getNews } from '../../api/NewsAPI';
+import { props } from '../props';
 
-export default function News({ newsPerPage }) {
+export default function News({newsPerPage, fontSize}: props ) {
     const [news, setNews] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => {
@@ -26,8 +27,8 @@ export default function News({ newsPerPage }) {
                 renderItem={({ item }) => (
                     <TouchableOpacity onPress={() => Linking.openURL(item.url)}>
                         <View style={styles.newsItem}>
-                            <Text style={styles.newsTitle}>{item.title}</Text>
-                            <Text style={styles.newsDescription}>{item.description}</Text>
+                            <Text style={[styles.newsTitle, {fontSize:fontSize}]}>{item.title}</Text>
+                            <Text style={{fontSize:fontSize - 2}}>{item.description}</Text>
                         </View>
                     </TouchableOpacity>
                 )}
@@ -73,9 +74,6 @@ const styles = StyleSheet.create({
     newsTitle: {
         fontSize: 16,
         fontWeight: 'bold',
-    },
-    newsDescription: {
-        fontSize: 14,
     },
     buttonContainer: {
         backgroundColor: '#98AD47',
