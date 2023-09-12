@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import { instance } from "../../api/axios";
+import { props } from "../props";
 
-export default function GetAllergy() {
+export default function GetAllergy({ fontSize }: props) {
     const [allergies, setAllergies] = useState([]);
 
     useEffect(() => {
@@ -30,21 +31,21 @@ export default function GetAllergy() {
 
     const renderAllergyItem = ({ item }) => (
         <View style={allergyStyles.list}>
-            <Text style={allergyStyles.allergyName}>{item.name}</Text>
-            <Text style={allergyStyles.allergyDescription}>{item.description}</Text>
-            <Text style={allergyStyles.treatment}>{item.treatment}</Text>
+            <Text style={[allergyStyles.allergyName, {fontSize:fontSize}]}>{item.name}</Text>
+            <Text style={[allergyStyles.allergyDescription, {fontSize:fontSize - 2}]}>{item.description}</Text>
+            <Text style={[allergyStyles.treatment, {fontSize:fontSize - 2}]}>{item.treatment}</Text>
             <TouchableOpacity
                 style={allergyStyles.deleteButton}
                 onPress={() => handleDeleteAllergy(item.id)}
             >
-                <Text style={allergyStyles.deleteButtonText}>Excluir</Text>
+                <Text style={[allergyStyles.deleteButtonText, {fontSize:fontSize}]}>Excluir</Text>
             </TouchableOpacity>
         </View>
     );
 
     return (
         <View style={allergyStyles.container}>
-            <Text style={allergyStyles.title}>Lista de Alergias</Text>
+            <Text style={[allergyStyles.title, {fontSize:fontSize + 4}]}>Lista de Alergias</Text>
             <FlatList
                 data={allergies}
                 keyExtractor={(item) => item.id.toString()}

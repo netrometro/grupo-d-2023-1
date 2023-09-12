@@ -3,23 +3,37 @@ import {Text, View, StyleSheet} from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import NewAllergy from "../components/Allergy/NewAllergy";
 import GetAlergy from "../components/Allergy/GetAllergy";
-import { instance } from "../api/axios";
+import FontSize from "../components/font/font";
+import Header from "../components/Header";
 
 
 export default function Allergy() {
+  const [fontSize, setFontSize] = useState(16);
+
+  const increaseFontSize = () => {
+    setFontSize(fontSize + 2);
+  };
+
+  const decreaseFontSize = () => {
+    setFontSize(fontSize - 2);
+  };
 
   return (
-    <View style={allergyStyles.container}>
-      <View style={allergyStyles.titleBox}>
-        <View style={allergyStyles.icon}>
-          <Ionicons name="remove-circle" size={33} color="#98AD47" style={allergyStyles.allergyIcon}/>
+    <View>
+      <Header />
+      <FontSize onDecreaseFontSize={decreaseFontSize} onIncreaseFontSize={increaseFontSize} fontSize={fontSize}/>
+      <View style={allergyStyles.container}>
+        <View style={allergyStyles.titleBox}>
+          <View style={allergyStyles.icon}>
+            <Ionicons name="remove-circle" size={33} color="#98AD47" style={allergyStyles.allergyIcon}/>
+          </View>
+          <Text style={[allergyStyles.title, {fontSize: fontSize + 4}]}>Alergias</Text>
+          <View style={allergyStyles.borderLine}/>
         </View>
-        <Text style={allergyStyles.title}>Alergias</Text>
-        <View style={allergyStyles.borderLine}/>
-      </View>
-      <View style={allergyStyles.containerComp}>
-        <NewAllergy/>
-        <GetAlergy/>
+        <View style={allergyStyles.containerComp}>
+          <NewAllergy fontSize={fontSize}/>
+          <GetAlergy fontSize={fontSize}/>
+        </View>
       </View>
     </View>
   );
