@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { instance } from "../../api/axios";
 import React from "react";
+import { props } from "../props";
 
 interface Symptoms {
   id: number;
@@ -24,7 +25,8 @@ interface Symptoms {
   updatedAt: Date;
   deletedAt?: Date;
 }
-export default function CreateSymptoms() {
+
+export default function CreateSymptoms({ fontSize }: props) {
   const [symptomsList, setSymptomsList] = useState<Symptoms[]>([]);
   const [symptomName, setSymptomName] = useState("");
   const [symptomDescription, setSymptomDescription] = useState("");
@@ -70,59 +72,59 @@ export default function CreateSymptoms() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
 
       <View style={{display: "flex", flexDirection: "row", gap:8, justifyContent: "flex-start"}}>
         <View style={styles.elipse}> 
             <FontAwesome5 name="heartbeat" size={20} color="#98AD47" />
         </View>
-        <Text style={styles.mainTitle}> Sintomas </Text>
+        <Text style={[styles.mainTitle, {fontSize: fontSize + 4}]}> Sintomas </Text>
       </View>
       
-      <Text style={styles.title}> Cadastrar sintomas</Text>
+      <Text style={[styles.title, {fontSize: fontSize +4}]}> Cadastrar sintomas</Text>
       <View style={{display: "flex", alignItems: "center", justifyContent: "center",}}>
             
         
         <View>
-            <Text style={styles.label}> Sintoma: </Text>
+            <Text style={[styles.label, {fontSize: fontSize - 2}]}> Sintoma: </Text>
             <TextInput
-            style={styles.input}
+            style={[styles.input, {fontSize:fontSize}]}
             placeholder="Digite o nome do sintoma"
             value={symptomName}
             onChangeText={setSymptomName}
             />
         </View>
         <View>
-            <Text style={styles.label}> Informações adicionais </Text>
+            <Text style={[styles.label, {fontSize: fontSize - 2}]}> Informações adicionais </Text>
             <TextInput
-            style={styles.bigInput}
+            style={[styles.bigInput, {fontSize:fontSize}]}
             placeholder="Ex: sintoma acontece quando estou nervosa"
             value={symptomDescription}
             onChangeText={setSymptomDescription}
             />
         </View>
         <View>
-            <Text style={styles.label}> Medicação </Text>
+            <Text style={[styles.label, {fontSize: fontSize - 2}]}> Medicação </Text>
             <TextInput
-            style={styles.input}
+            style={[styles.input, {fontSize:fontSize}]}
             placeholder="Digite medicação, caso tenha tomadoo alguma"
             value={symptomMedication}
             onChangeText={setSymptomMedication}
             />
         </View>
         <View>
-            <Text style={styles.label}> Data inicial do sintoma: </Text>
+            <Text style={[styles.label, {fontSize: fontSize - 2}]}> Data inicial do sintoma: </Text>
             <TextInput
-            style={styles.input}
+            style={[styles.input, {fontSize:fontSize}]}
             placeholder="Digite a data em que o sintoma começou"
             value={symptomInitialDate}
             onChangeText={setSymptomInitialDate}
             />
         </View>
         <View>
-            <Text style={styles.label}> Data final: </Text>
+            <Text style={[styles.label, {fontSize: fontSize - 2}]}> Data final: </Text>
             <TextInput
-            style={styles.input}
+            style={[styles.input, {fontSize:fontSize}]}
             placeholder="Digite a data em que parou de sentir sintoma"
             value={symptomFinalDate}
             onChangeText={setSymptomFinalDate}
@@ -132,11 +134,11 @@ export default function CreateSymptoms() {
       <View style={{ display: "flex", flexDirection: "column", alignContent: "flex-end" }}>
         {/* botão de cadastro */}
         <TouchableOpacity style={styles.button} onPress={createSymptom}>
-          <Text style={{color: "#fff", fontWeight: "bold",}}>Cadastrar</Text>
+          <Text style={{color: "#fff", fontWeight: "bold", fontSize:fontSize}}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
       <View style= {styles.divisor}></View>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -147,6 +149,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
+    paddingTop: 20,
   },
 
   divisor:{
@@ -156,7 +159,6 @@ const styles = StyleSheet.create({
   },
 
   mainTitle: {
-    fontSize: 20,
     fontWeight: "normal",
     marginTop: 8,
     textAlign: "center",
@@ -172,7 +174,6 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    fontSize: 14,
     fontWeight: "normal",
     marginBottom: 10,
   },

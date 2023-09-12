@@ -11,8 +11,9 @@ import {
 import { instance } from "../../api/axios";
 import { deleteSymptom } from "./deleteSymptoms"; 
 import { useNavigation } from "@react-navigation/native";
+import { props } from "../props";
 
-export default function ListSymptoms() {
+export default function ListSymptoms({ fontSize }: props) {
   const [symptomsList, setSymptomsList] = useState([]);
 
   useEffect(() => {
@@ -50,19 +51,19 @@ export default function ListSymptoms() {
             />
           </TouchableOpacity>
         </View>
-        <Text style={styles.label}>{item.name}</Text>
-        <Text style={styles.labelgreen}>Descrição:</Text>
-        <Text style={styles.label}>{item.description}</Text>
-        <Text style={styles.labelgreen}>Medicação:</Text>
-        <Text style={styles.label}>{item.medication}</Text>
+        <Text style={[styles.label, {fontSize: fontSize}]}>{item.name}</Text>
+        <Text style={[styles.labelgreen, {fontSize: fontSize}]}>Descrição:</Text>
+        <Text style={[styles.label, {fontSize: fontSize}]}>{item.description}</Text>
+        <Text style={[styles.labelgreen, {fontSize: fontSize}]}>Medicação:</Text>
+        <Text style={[styles.label, {fontSize: fontSize}]}>{item.medication}</Text>
         <View style={styles.row}>
           <View style={{ flexDirection: "column" }}>
-            <Text style={styles.labelgreen}>Data inicial:</Text>
-            <Text style={styles.label}>{item.startDate}</Text>
+            <Text style={[styles.labelgreen, {fontSize: fontSize}]}>Data inicial:</Text>
+            <Text style={[styles.label, {fontSize: fontSize}]}>{item.startDate}</Text>
           </View>
           <View style={{ flexDirection: "column" }}>
-            <Text style={styles.labelgreen}>Data final:</Text>
-            <Text style={styles.label}>{item.endDate}</Text>
+            <Text style={[styles.labelgreen, {fontSize: fontSize}]}>Data final:</Text>
+            <Text style={[styles.label, {fontSize: fontSize}]}>{item.endDate}</Text>
           </View>
         </View>
       </View>
@@ -70,7 +71,7 @@ export default function ListSymptoms() {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Sintomas Registrados:</Text>
+        <Text style={[styles.title, {fontSize: fontSize + 4}]}>Sintomas Registrados:</Text>
           <FlatList horizontal={true}
             data={symptomsList}
             keyExtractor={(item) => item.id.toString()}
