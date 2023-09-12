@@ -3,8 +3,9 @@ import {Text, View, TextInput, StyleSheet} from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useState, useEffect  } from "react";
 import { instance } from "../../api/axios";
+import { props } from "../props";
 
-export default function Dosage() {
+export default function Dosage({ fontSize }: props) {
   const [dosage, setDosage] = useState("");
   const [info, setInfo] = useState(null);
   const [weight, setWeight] = useState(0);
@@ -61,30 +62,33 @@ export default function Dosage() {
           <View style={styles.elipse}> 
               <FontAwesome5 name="pills" size={20} color="#98AD47" />
           </View>
-          <Text style={styles.mainTitle}> Medicamentos </Text>
+          <Text style={[styles.mainTitle, {fontSize:fontSize + 4}]}> Medicamentos </Text>
         </View>
-        <Text style={styles.title}>Dosagem de medicamento</Text>
-        <Text style={styles.label}>
+        <Text style={[styles.title, {fontSize:fontSize + 4}]}>Dosagem de medicamento</Text>
+        <Text style={[styles.label, {fontSize:fontSize}]}>
           Para calcular a dosagem de um medicamento é necessário saber a dose que deve
           ser administrada por quilo do paciente.
           Por exemplo: Se na descrição da bula do medicamento 
           estiver indicando que a prescrição deve ser 100mg/Kg/dia quer dizer que em um 
           dia deve ser administrado 100 mg do medicamento para cada quilo do paciente. 
         </Text>
-        <Text style={styles.label}>Peso</Text>
-        <Text style={styles.input}>{weight}</Text>
-        <Text style={styles.label}>Dose (mg)</Text>
+        <Text style={[styles.label, {fontSize:fontSize}]}>Peso</Text>
+        <Text style={[styles.input, {fontSize:fontSize}]}>{weight}</Text>
+        <Text style={[styles.label, {fontSize:fontSize}]}>Dose (mg)</Text>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {fontSize:fontSize}]}
           placeholder="Digite a dosagem"
           keyboardType="numeric"
           onChangeText={ (number) => handleChange(number)}
         />
         <View style={styles.divisor}></View>
-        <Text style={styles.label}>Resultado</Text>
-        <Text style={styles.labelgreen}>{calculateDosage()} mg</Text>
-        <Text style={styles.label}>Resultado em ml</Text>
-        <Text style={styles.labelgreen}>{parseToMl()} ml</Text>
+        <View style={{ marginBottom: 180}}>
+          <Text style={[styles.label, {fontSize:fontSize}]}>Resultado</Text>
+          <Text style={[styles.labelgreen, {fontSize:fontSize}]}>{calculateDosage()} mg</Text>
+          <Text style={[styles.label, {fontSize:fontSize}]}>Resultado em ml</Text>
+          <Text style={[styles.labelgreen, {fontSize:fontSize}]}>{parseToMl()} ml</Text>
+          <View style={styles.divisor}></View>
+        </View>
       </View>
     </View>
   );
@@ -105,7 +109,7 @@ const styles = StyleSheet.create({
     divisor:{
       borderBottomWidth: 1,
       borderBottomColor: "#98AD47",
-      padding: 20
+      margin:10,
     },
   
     mainTitle: {
@@ -129,6 +133,7 @@ const styles = StyleSheet.create({
       fontSize: 14,
       fontWeight: "normal",
       marginBottom: 10,
+      marginTop: 10,
     },
   
     labelgreen: {

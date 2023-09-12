@@ -9,8 +9,9 @@ import {
   Modal,
 } from "react-native";
 import axios from "axios";
+import { props } from "../props";
 
-export default function MedicationLeaflet() {
+export default function MedicationLeaflet({ fontSize }: props) {
   const [nomeMedicamento, setNomeMedicamento] = useState("");
   const [idBula, setIdBula] = useState("");
   const [pdfBula, setPdfBula] = useState("");
@@ -53,27 +54,26 @@ export default function MedicationLeaflet() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.divisor}></View>
-      <Text style={styles.title}>Pesquisar Bula de Medicamento</Text>
-      <Text style={styles.label}>Nome do Medicamento:</Text>
+      <Text style={[styles.title, {fontSize:fontSize + 4}]}>Pesquisar Bula de Medicamento</Text>
+      <Text style={[styles.label, {fontSize:fontSize}]}>Nome do Medicamento:</Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, {fontSize:fontSize}]}
         value={nomeMedicamento}
         onChangeText={(text) => setNomeMedicamento(text)}
       />
       <TouchableOpacity onPress={handlePesquisarMedicamento} style={styles.button}>
-        <Text style={{color: "#fff", fontWeight: "bold",}}>Pesquisar</Text>
+        <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Pesquisar</Text>
       </TouchableOpacity>
       {idBula ? (
         <TouchableOpacity style={styles.button2} onPress={handleBuscarPDFBula}>
-            <Text style={{color: "#fff", fontWeight: "bold",}}>Buscar PDF da Bula</Text>
+            <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Buscar PDF da Bula</Text>
         </TouchableOpacity>
       ) : null}
       {pdfBula ? (
-        <Text style={styles.label}>
+        <Text style={[styles.label, {fontSize:fontSize}]}>
           Link para a bula:
           <Text
-            style={{ color: "blue", textDecorationLine: "underline" }}
+            style={{ color: "blue", textDecorationLine: "underline"}}
             onPress={() => Linking.openURL(pdfBula)}
           >
           {pdfBula}   
@@ -89,24 +89,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Helvetica-Oblique",
-    paddingBottom: 80,
     paddingLeft: 20,
     paddingRight: 20,
     marginTop: 100,
-  },
-
-  divisor: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#98AD47",
-    padding: 20,
-  },
-
-  mainTitle: {
-    fontSize: 20,
-    fontWeight: "normal",
-    marginTop: 8,
-    textAlign: "center",
-    marginBottom: 10,
   },
 
   title: {
@@ -153,7 +138,6 @@ const styles = StyleSheet.create({
     paddingStart: 10,
     display: "flex",
     alignItems: "center",
-    fontSize: 12,
     flexShrink: 0,
   },
   bigInput: {
