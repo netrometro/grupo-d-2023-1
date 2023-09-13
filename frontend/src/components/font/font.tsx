@@ -23,18 +23,18 @@ const FontSize: React.FC<FontSizeProps> = ({
           justifyContent: "space-around",
         }}
       >
-        <TouchableOpacity
+        <TouchableOpacity accessibilityRole="button"
           style={homeStyles.button}
           onPress={onDecreaseFontSize}
         >
           <FontAwesome5 name="minus" size={24} color="#fff" />
         </TouchableOpacity>
 
-        <Text style={{ fontSize: 20, fontWeight: "bold", color: "#80913b" }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold", color: "#166069" }}>
           {fontSize}
         </Text>
 
-        <TouchableOpacity
+        <TouchableOpacity accessibilityRole="button"
           style={homeStyles.button}
           onPress={onIncreaseFontSize}
         >
@@ -48,7 +48,7 @@ const FontSize: React.FC<FontSizeProps> = ({
 
 const homeStyles = StyleSheet.create({
   button: {
-    backgroundColor: "#98AD47",
+    backgroundColor: "#166069",
     borderRadius: 10,
     padding: 10,
     width: 50,
@@ -67,7 +67,7 @@ const homeStyles = StyleSheet.create({
   },
   divisor: {
     borderBottomWidth: 1,
-    borderBottomColor: "#98AD47",
+    borderBottomColor: "#166069",
     padding: 20,
   },
 });

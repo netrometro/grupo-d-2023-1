@@ -20,9 +20,9 @@ const CreateUser = () => {
 
   return (
     <View>
-      <TextInput placeholder="Nome" value={name} onChangeText={setName} />
-      <TextInput placeholder="E-mail" value={email} onChangeText={setEmail} />
-      <TextInput
+      <TextInput accessibilityRole="text" placeholder="Nome" value={name} onChangeText={setName} />
+      <TextInput accessibilityRole="text" placeholder="E-mail" value={email} onChangeText={setEmail} />
+      <TextInput accessibilityRole="text"
         placeholder="Senha"
         secureTextEntry
         value={password}

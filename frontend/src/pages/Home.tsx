@@ -24,12 +24,12 @@ export default function Home() {
   ];
 
   const renderOption = ({ item }) => (
-    <TouchableOpacity
+    <TouchableOpacity accessibilityRole="button"
       style={homeStyles.optionView}
       onPress={() => navigation.navigate(item.route)}
     >
       <View style={homeStyles.optionIcon}>
-        <FontAwesome5 name={item.icon} size={33} color="#98AD47" />
+        <FontAwesome5 name={item.icon} size={33} color="#166069" />
       </View>
       <Text style={[homeStyles.optionText, {fontSize: fontSize}] }>{item.text}</Text>
     </TouchableOpacity>
@@ -72,7 +72,7 @@ const homeStyles = StyleSheet.create({
     flex: 1,
   },
   question: {
-    color: "#80913b",
+    color: "#166069",
     fontFamily: "Helvetica-Oblique",
     fontWeight: "bold",
     marginTop: 32,
@@ -108,7 +108,7 @@ const homeStyles = StyleSheet.create({
     left: "5%",
     right: "5%",
     height: 2,
-    backgroundColor: "#e6e6e6",
+    backgroundColor: "#166069",
   },
  
 });

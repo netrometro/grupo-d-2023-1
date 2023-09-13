@@ -101,7 +101,7 @@ const bmiStyles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         marginBottom: 10,
-        color: "#98AD47",
+        color: "#166069",
         fontFamily: "Helvetica-Oblique",
     },
     infoContainer: {

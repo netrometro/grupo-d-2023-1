@@ -22,8 +22,8 @@ const EditUser: React.FC<EditUserProps> = ({ userId }) => {
 
   return (
     <View>
-      <TextInput placeholder="Nome" value={name} onChangeText={setName} />
-      <TextInput placeholder="E-mail" value={email} onChangeText={setEmail} />
+      <TextInput accessibilityRole="text" placeholder="Nome" value={name} onChangeText={setName} />
+      <TextInput accessibilityRole="text" placeholder="E-mail" value={email} onChangeText={setEmail} />
       <Button title="Atualizar" onPress={handleUpdate} />
     </View>
   );
