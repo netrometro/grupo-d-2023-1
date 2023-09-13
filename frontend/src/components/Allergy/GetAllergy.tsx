@@ -34,9 +34,12 @@ export default function GetAllergy({ fontSize }: props) {
             <Text style={[allergyStyles.allergyName, {fontSize:fontSize}]}>{item.name}</Text>
             <Text style={[allergyStyles.allergyDescription, {fontSize:fontSize - 2}]}>{item.description}</Text>
             <Text style={[allergyStyles.treatment, {fontSize:fontSize - 2}]}>{item.treatment}</Text>
-            <TouchableOpacity
+            <TouchableOpacity accessibilityRole="button"
                 style={allergyStyles.deleteButton}
                 onPress={() => handleDeleteAllergy(item.id)}
+                accessible={true} 
+                accessibilityLabel="Excluir alergia" 
+                accessibilityHint="Ao ser pressionado exclui a alergia selecionada"
             >
                 <Text style={[allergyStyles.deleteButtonText, {fontSize:fontSize}]}>Excluir</Text>
             </TouchableOpacity>
@@ -64,7 +67,7 @@ const allergyStyles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         marginBottom: 10,
-        color: '#98AD47',
+        color: '#166069',
         fontFamily: 'Helvetica-Oblique',
     },
     allergyItem: {
@@ -98,7 +101,7 @@ const allergyStyles = StyleSheet.create({
         paddingBottom: 10,
     },
     deleteButton: {
-        backgroundColor: "#98AD47",
+        backgroundColor: "#166069",
         padding: 5,
         borderRadius: 4,
         marginTop: 5,
