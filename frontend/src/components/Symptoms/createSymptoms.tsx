@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   GestureResponderEvent,
   ScrollView,
+  Keyboard,
 } from "react-native";
 import { instance } from "../../api/axios";
 import React from "react";
@@ -26,6 +27,117 @@ interface Symptoms {
   deletedAt?: Date;
 }
 
+const sugestoesMedicamentos = [
+  "Paracetamol",
+  "Ibuprofeno",
+  "Amoxicilina",
+  "Dipirona",
+  "Omeprazol",
+  "Dexametasona",
+  "Azitromicina",
+  "Sinvastatina",
+  "Losartana",
+  "Captopril",
+  "Enalapril",
+  "Hidroclorotiazida",
+  "Atenolol",
+  "Propranolol",
+  "Metformina",
+  "Glibenclamida",
+  "Insulina",
+  "Levotiroxina",
+  "Olanzapina",
+  "Risperidona",
+  "Lorazepam",
+  "Sertralina",
+  "Fluoxetina",
+  "Mirtazapina",
+  "Clonazepam",
+  "Diazepam",
+  "Citalopram",
+  "Escitalopram",
+  "Bupropiona",
+  "Venlafaxina",
+  "Alprazolam",
+  "Loratadina",
+  "Desloratadina",
+  "Cetirizina",
+  "Fexofenadina",
+  "Ciprofloxacino",
+  "Amoxicilina + Clavulanato",
+  "Levofloxacino",
+  "Trimetoprima + Sulfametoxazol",
+  "Metronidazol",
+  "Doxiciclina",
+  "Fluconazol",
+  "Itraconazol",
+  "Miconazol",
+  "Nistatina",
+  "Ranitidina",
+  "Famotidina",
+  "Ondansetrona",
+  "Metoclopramida",
+  "Dimeticona",
+  "Pantoprazol",
+  "Rabeprazol",
+  "Lansoprazol",
+  "Esomeprazol",
+  "Sulfato Ferroso",
+  "Ácido Fólico",
+  "Levonorgestrel",
+  "Etinilestradiol + Drospirenona",
+  "Medroxiprogesterona",
+  "Sildenafila",
+  "Tadalafila",
+  "Finasterida",
+  "Dutasterida",
+  "Alendronato de Sódio",
+  "Ibandronato de Sódio",
+  "Risedronato de Sódio",
+  "Calcitriol",
+  "Vitamina D3",
+  "Cálcio",
+  "Ácido Acetilsalicílico",
+  "Clopidogrel",
+  "Warfarina",
+  "Varfarina",
+  "Enoxaparina",
+  "Heparina",
+  "Insulina Glargina",
+  "Insulina Aspart",
+  "Insulina Lispro",
+  "Insulina NPH",
+  "Insulina Regular",
+  "Levozine",
+  "Ciclobenzaprina",
+  "Meloxicam",
+  "Celecoxibe",
+  "Diclofenaco",
+  "Naproxeno",
+  "Paroxetina",
+  "Fluvoxamina",
+  "Nortriptilina",
+  "Amitriptilina",
+  "Oxcarbazepina",
+  "Topiramato",
+  "Carbamazepina",
+  "Gabapentina",
+  "Pregabalina",
+  "Lítio",
+  "Valproato de Sódio",
+  "Risperidona",
+  "Olanzapina",
+  "Aripiprazol",
+  "Quetiapina",
+  "Ziprasidona",
+  "Haloperidol",
+  "Bromazepam",
+  "Midazolam",
+  "Zolpidem",
+  "Zopiclona",
+];
+
+
 export default function CreateSymptoms({ fontSize }: props) {
   const [symptomsList, setSymptomsList] = useState<Symptoms[]>([]);
   const [symptomName, setSymptomName] = useState("");
@@ -33,11 +145,12 @@ export default function CreateSymptoms({ fontSize }: props) {
   const [symptomMedication, setSymptomMedication] = useState("");
   const [symptomInitialDate, setSymptomInitialDate] = useState("");
   const [symptomFinalDate, setSymptomFinalDate] = useState("");
+  const [suggestionsVisible, setSuggestionsVisible] = useState(false);
   const user_id = "7340db54-07b4-4608-8ad4-c7cf9755566e";
 
   async function createSymptom(event: GestureResponderEvent) {
     event.preventDefault();
-  
+
     try {
       const newSymptomData = {
         name: symptomName,
@@ -47,19 +160,19 @@ export default function CreateSymptoms({ fontSize }: props) {
         endDate: symptomFinalDate,
         user_id: user_id,
       };
-  
+
       const response = await instance.post("/symptoms/create", newSymptomData);
-  
+
       if (response.status === 201) {
         setSymptomName("");
         setSymptomDescription("");
         setSymptomMedication("");
         setSymptomInitialDate("");
         setSymptomFinalDate("");
-  
+
         const updatedResponse = await instance.get("/symptoms");
         setSymptomsList(updatedResponse.data);
-  
+
         alert("Sintoma cadastrado com sucesso");
         console.log(response.data);
       } else {
@@ -70,6 +183,17 @@ export default function CreateSymptoms({ fontSize }: props) {
       alert("Erro ao cadastrar sintoma");
     }
   }
+
+  const handleMedicationChange = (text: string) => {
+    setSymptomMedication(text);
+    setSuggestionsVisible(text.length > 0);
+  };
+
+  const handleSuggestionPress = (sugestao: string) => {
+    setSymptomMedication(sugestao);
+    setSuggestionsVisible(false);
+    Keyboard.dismiss();
+  };
 
   return (
     <View style={styles.container}>
@@ -92,7 +216,7 @@ export default function CreateSymptoms({ fontSize }: props) {
             placeholder="Digite o nome do sintoma"
             value={symptomName}
             onChangeText={setSymptomName}
-            />
+          />
         </View>
         <View>
             <Text style={[styles.label, {fontSize: fontSize - 2}]}> Informações adicionais </Text>
@@ -104,7 +228,7 @@ export default function CreateSymptoms({ fontSize }: props) {
             placeholder="Ex: sintoma acontece quando estou nervosa"
             value={symptomDescription}
             onChangeText={setSymptomDescription}
-            />
+          />
         </View>
         <View>
             <Text style={[styles.label, {fontSize: fontSize - 2}]}> Medicação </Text>
@@ -113,8 +237,25 @@ export default function CreateSymptoms({ fontSize }: props) {
             style={[styles.input, {fontSize:fontSize}]}
             placeholder="Digite medicação, caso tenha tomado alguma"
             value={symptomMedication}
-            onChangeText={setSymptomMedication}
-            />
+            onChangeText={handleMedicationChange}
+          />
+          {suggestionsVisible && (
+            <View style={styles.sugestoesContainer}>
+              {sugestoesMedicamentos
+                .filter((sugestao) =>
+                  sugestao.toLowerCase().includes(symptomMedication.toLowerCase())
+                )
+                .map((sugestao, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={styles.sugestao}
+                    onPress={() => handleSuggestionPress(sugestao)}
+                  >
+                    <Text>{sugestao}</Text>
+                  </TouchableOpacity>
+                ))}
+            </View>
+          )}
         </View>
         <View>
             <Text style={[styles.label, {fontSize: fontSize - 2}]}> Data inicial do sintoma: </Text>
@@ -124,7 +265,7 @@ export default function CreateSymptoms({ fontSize }: props) {
             placeholder="Digite a data em que o sintoma começou"
             value={symptomInitialDate}
             onChangeText={setSymptomInitialDate}
-            />
+          />
         </View>
         <View>
             <Text style={[styles.label, {fontSize: fontSize - 2}]}> Data final: </Text>
@@ -134,7 +275,7 @@ export default function CreateSymptoms({ fontSize }: props) {
             placeholder="Digite a data em que parou de sentir sintoma"
             value={symptomFinalDate}
             onChangeText={setSymptomFinalDate}
-            />
+          />
         </View>
       </View>
       <View style={{ display: "flex", flexDirection: "column", alignContent: "flex-end" }}>
@@ -153,6 +294,7 @@ export default function CreateSymptoms({ fontSize }: props) {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -231,4 +373,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     },
-});
+    sugestoesContainer: {
+      backgroundColor: "#fff",
+      borderWidth: 1,
+      borderColor: "#ccc",
+      borderRadius: 5,
+      marginTop: 5,
+    },
+    sugestao: {
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: "#ccc",
+    },
+  }); 
+  
+  
+  
+  

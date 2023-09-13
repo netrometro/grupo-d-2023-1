@@ -7,14 +7,138 @@ import {
   Linking,
   TouchableOpacity,
   Modal,
+  ScrollView,
 } from "react-native";
 import axios from "axios";
 import { props } from "../props";
+
+
+const sugestoesMedicamentos = [
+  "Paracetamol",
+  "Ibuprofeno",
+  "Amoxicilina",
+  "Dipirona",
+  "Omeprazol",
+  "Dexametasona",
+  "Azitromicina",
+  "Sinvastatina",
+  "Losartana",
+  "Captopril",
+  "Enalapril",
+  "Hidroclorotiazida",
+  "Atenolol",
+  "Propranolol",
+  "Metformina",
+  "Glibenclamida",
+  "Insulina",
+  "Levotiroxina",
+  "Olanzapina",
+  "Risperidona",
+  "Lorazepam",
+  "Sertralina",
+  "Fluoxetina",
+  "Mirtazapina",
+  "Clonazepam",
+  "Diazepam",
+  "Citalopram",
+  "Escitalopram",
+  "Bupropiona",
+  "Venlafaxina",
+  "Alprazolam",
+  "Loratadina",
+  "Desloratadina",
+  "Cetirizina",
+  "Fexofenadina",
+  "Ciprofloxacino",
+  "Amoxicilina + Clavulanato",
+  "Levofloxacino",
+  "Trimetoprima + Sulfametoxazol",
+  "Metronidazol",
+  "Doxiciclina",
+  "Fluconazol",
+  "Itraconazol",
+  "Miconazol",
+  "Nistatina",
+  "Ranitidina",
+  "Famotidina",
+  "Ondansetrona",
+  "Metoclopramida",
+  "Dimeticona",
+  "Pantoprazol",
+  "Rabeprazol",
+  "Lansoprazol",
+  "Esomeprazol",
+  "Sulfato Ferroso",
+  "Ácido Fólico",
+  "Levonorgestrel",
+  "Etinilestradiol + Drospirenona",
+  "Medroxiprogesterona",
+  "Sildenafila",
+  "Tadalafila",
+  "Finasterida",
+  "Dutasterida",
+  "Alendronato de Sódio",
+  "Ibandronato de Sódio",
+  "Risedronato de Sódio",
+  "Calcitriol",
+  "Vitamina D3",
+  "Cálcio",
+  "Ácido Acetilsalicílico",
+  "Clopidogrel",
+  "Warfarina",
+  "Varfarina",
+  "Enoxaparina",
+  "Heparina",
+  "Insulina Glargina",
+  "Insulina Aspart",
+  "Insulina Lispro",
+  "Insulina NPH",
+  "Insulina Regular",
+  "Levozine",
+  "Ciclobenzaprina",
+  "Meloxicam",
+  "Celecoxibe",
+  "Diclofenaco",
+  "Naproxeno",
+  "Paroxetina",
+  "Fluvoxamina",
+  "Nortriptilina",
+  "Amitriptilina",
+  "Oxcarbazepina",
+  "Topiramato",
+  "Carbamazepina",
+  "Gabapentina",
+  "Pregabalina",
+  "Lítio",
+  "Valproato de Sódio",
+  "Risperidona",
+  "Olanzapina",
+  "Aripiprazol",
+  "Quetiapina",
+  "Ziprasidona",
+  "Haloperidol",
+  "Bromazepam",
+  "Midazolam",
+  "Zolpidem",
+  "Zopiclona",
+];
+
 
 export default function MedicationLeaflet({ fontSize }: props) {
   const [nomeMedicamento, setNomeMedicamento] = useState("");
   const [idBula, setIdBula] = useState("");
   const [pdfBula, setPdfBula] = useState("");
+  const [sugestoesVisiveis, setSugestoesVisiveis] = useState(false);
+
+  const handleInputChange = (text) => {
+    setNomeMedicamento(text);
+    setSugestoesVisiveis(true);
+  };
+
+  const handleSugestaoPress = (sugestao) => {
+    setNomeMedicamento(sugestao);
+    setSugestoesVisiveis(false);
+  };
 
   const handlePesquisarMedicamento = async () => {
     try {
@@ -53,14 +177,33 @@ export default function MedicationLeaflet({ fontSize }: props) {
   };
 
   return (
+    
     <View style={styles.container}>
       <Text style={[styles.title, {fontSize:fontSize + 4}]}>Pesquisar Bula de Medicamento</Text>
       <Text style={[styles.label, {fontSize:fontSize}]}>Nome do Medicamento:</Text>
       <TextInput accessibilityRole="text"
         style={[styles.input, {fontSize:fontSize}]}
         value={nomeMedicamento}
-        onChangeText={(text) => setNomeMedicamento(text)}
+        onChangeText={handleInputChange}
       />
+      
+      {sugestoesVisiveis && (
+        <View style={styles.sugestoesContainer}>
+          {sugestoesMedicamentos
+            .filter((sugestao) =>
+              sugestao.toLowerCase().includes(nomeMedicamento.toLowerCase())
+            )
+            .map((sugestao, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.sugestao}
+                onPress={() => handleSugestaoPress(sugestao)}
+              >
+                <Text>{sugestao}</Text>
+              </TouchableOpacity>
+            ))}
+        </View>
+      )}
       <TouchableOpacity accessibilityRole="button" 
       onPress={handlePesquisarMedicamento} 
       style={styles.button}
@@ -78,7 +221,7 @@ export default function MedicationLeaflet({ fontSize }: props) {
         accessibilityLabel="Buscar PDF da Bula" 
         accessibilityHint="Ao ser pressionado busca o PDF da bula do medicamento pesquisado"
         >
-            <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Buscar PDF da Bula</Text>
+          <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Buscar PDF da Bula</Text>
         </TouchableOpacity>
       ) : null}
       {pdfBula ? (
@@ -88,11 +231,12 @@ export default function MedicationLeaflet({ fontSize }: props) {
             style={{ color: "blue", textDecorationLine: "underline"}}
             onPress={() => Linking.openURL(pdfBula)}
           >
-          {pdfBula}   
+            {pdfBula}
           </Text>
         </Text>
-      ) : null}
+      ) : null} 
     </View>
+   
   );
 }
 
@@ -104,6 +248,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     marginTop: 90,
+  },
+
+  divisor: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#98AD47",
+    padding: 20,
   },
 
   title: {
@@ -168,5 +318,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#D9D9D9",
     alignItems: "center",
     justifyContent: "center",
+  },
+
+  sugestoesContainer: {
+    position: "absolute",
+    top: 90,
+    left: 20,
+    width: "90%",
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    zIndex: 999,
+  },
+
+  sugestao: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
   },
 });

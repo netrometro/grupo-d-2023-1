@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Helvetica-Oblique",
-    paddingBottom: 50,
+    paddingBottom: 10,
   },
+  sview:{
+    flex: 1
+  }
 });
