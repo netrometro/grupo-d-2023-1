@@ -56,23 +56,35 @@ export default function MedicationLeaflet({ fontSize }: props) {
     <View style={styles.container}>
       <Text style={[styles.title, {fontSize:fontSize + 4}]}>Pesquisar Bula de Medicamento</Text>
       <Text style={[styles.label, {fontSize:fontSize}]}>Nome do Medicamento:</Text>
-      <TextInput
+      <TextInput accessibilityRole="text"
         style={[styles.input, {fontSize:fontSize}]}
         value={nomeMedicamento}
         onChangeText={(text) => setNomeMedicamento(text)}
       />
-      <TouchableOpacity onPress={handlePesquisarMedicamento} style={styles.button}>
+      <TouchableOpacity accessibilityRole="button" 
+      onPress={handlePesquisarMedicamento} 
+      style={styles.button}
+      accessible={true} 
+      accessibilityLabel="Pesquisar Medicamento" 
+      accessibilityHint="Ao ser pressionado pesquisa o medicamento digitado"
+      >
         <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Pesquisar</Text>
       </TouchableOpacity>
       {idBula ? (
-        <TouchableOpacity style={styles.button2} onPress={handleBuscarPDFBula}>
+        <TouchableOpacity accessibilityRole="button" 
+        style={styles.button2} 
+        onPress={handleBuscarPDFBula}
+        accessible={true} 
+        accessibilityLabel="Buscar PDF da Bula" 
+        accessibilityHint="Ao ser pressionado busca o PDF da bula do medicamento pesquisado"
+        >
             <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Buscar PDF da Bula</Text>
         </TouchableOpacity>
       ) : null}
       {pdfBula ? (
         <Text style={[styles.label, {fontSize:fontSize}]}>
           Link para a bula:
-          <Text
+          <Text accessibilityRole="link"
             style={{ color: "blue", textDecorationLine: "underline"}}
             onPress={() => Linking.openURL(pdfBula)}
           >
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "normal",
-    color: "#98AD47",
+    color: "#166069",
     marginTop: 8,
     marginBottom: 10,
     textAlign: "left",
@@ -112,19 +124,19 @@ const styles = StyleSheet.create({
   labelgreen: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#98AD47",
+    color: "#166069",
     marginBottom: 10,
   },
 
   button: {
-    backgroundColor: "#98AD47",
+    backgroundColor: "#166069",
     borderRadius: 10,
     padding: 10,
     width: 100,
     marginBottom: 10,
   },
   button2: {
-    backgroundColor: "#98AD47",
+    backgroundColor: "#166069",
     borderRadius: 10,
     padding: 10,
     width: 200,

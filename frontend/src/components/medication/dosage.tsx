@@ -60,7 +60,7 @@ export default function Dosage({ fontSize }: props) {
       <View >
         <View style={{display: "flex", flexDirection: "row", gap:8, justifyContent: "flex-start"}}>
           <View style={styles.elipse}> 
-              <FontAwesome5 name="pills" size={20} color="#98AD47" />
+              <FontAwesome5 name="pills" size={20} color="#166069" />
           </View>
           <Text style={[styles.mainTitle, {fontSize:fontSize + 4}]}> Medicamentos </Text>
         </View>
@@ -75,7 +75,7 @@ export default function Dosage({ fontSize }: props) {
         <Text style={[styles.label, {fontSize:fontSize}]}>Peso</Text>
         <Text style={[styles.input, {fontSize:fontSize}]}>{weight}</Text>
         <Text style={[styles.label, {fontSize:fontSize}]}>Dose (mg)</Text>
-        <TextInput
+        <TextInput accessibilityRole="text"
           style={[styles.input, {fontSize:fontSize}]}
           placeholder="Digite a dosagem"
           keyboardType="numeric"
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   
     divisor:{
       borderBottomWidth: 1,
-      borderBottomColor: "#98AD47",
+      borderBottomColor: "#166069",
       margin:10,
     },
   
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 20,
       fontWeight: "normal",
-      color: "#98AD47",
+      color: "#166069",
       marginTop: 8,
       marginBottom: 10,
       textAlign: "left",
@@ -139,12 +139,12 @@ const styles = StyleSheet.create({
     labelgreen: {
       fontSize: 14,
       fontWeight: "bold",
-      color: "#98AD47",
+      color: "#166069",
       marginBottom: 10,
     },
   
     button: {
-      backgroundColor: "#98AD47",
+      backgroundColor: "#166069",
       borderRadius: 10,
       padding: 10,
       width: 100,
