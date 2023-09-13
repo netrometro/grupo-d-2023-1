@@ -28,6 +28,16 @@ export default function ListSymptoms({ fontSize }: props) {
     fetchSymptoms();
   }, []);
 
+  const handleDelete = async (id: Number) => {
+    try {
+      const response = await instance.delete(`/symptoms/delete/${id}`);
+      console.log(response.data);
+      setSymptomsList(symptomsList.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const navigate = useNavigation();
   
 
@@ -44,7 +54,6 @@ export default function ListSymptoms({ fontSize }: props) {
             name="edit" 
             size={20} 
             color="#166069"
-            onPress={() =>  navigate.navigate("EditSymptoms")} 
             />
           </TouchableOpacity>
           <TouchableOpacity accessibilityRole="button"
@@ -56,7 +65,7 @@ export default function ListSymptoms({ fontSize }: props) {
               name="trash-2"
               size={20}
               color="#166069"
-              onPress={() => deleteSymptom(item.id)}
+              onPress={() => handleDelete(item.id)}
             />
           </TouchableOpacity>
         </View>

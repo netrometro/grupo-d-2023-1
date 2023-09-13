@@ -77,13 +77,16 @@ export default async function symptomController(fastify: FastifyInstance) {
         }
     })
     
+    interface SymptomIdParam {
+        id: number;
+      }
 
-    fastify.put('/symptoms/update/:id', async (request, reply) => {
+    fastify.put<{Params: SymptomIdParam}>('/symptoms/update/:id', async (request, reply) => {
         
         const {name, description, medication, startDate, endDate} = createSymptomSchema.parse(request.body);
 
         try{
-            const {id} = symptomIdParam.parse(request.params);
+            const {id} = request.params;
             const updatedSymptom = await prisma.symptom.update({
             
                 where: { id: id },
@@ -109,10 +112,12 @@ export default async function symptomController(fastify: FastifyInstance) {
         }
 
       })
+
       
-      fastify.delete('/symptoms/delete/:id', async (request, reply) => {
+      
+      fastify.delete<{Params: SymptomIdParam}>('/symptoms/delete/:id', async (request, reply) => {
         try{
-            const {id} = symptomIdParam.parse(request.params);
+            const {id} = request.params;
             
             await prisma.symptom.delete({
 
