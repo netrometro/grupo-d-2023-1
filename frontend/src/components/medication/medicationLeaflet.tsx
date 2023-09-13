@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Oblique",
     paddingLeft: 20,
     paddingRight: 20,
-    marginTop: 100,
+    marginTop: 90,
   },
 
   title: {
