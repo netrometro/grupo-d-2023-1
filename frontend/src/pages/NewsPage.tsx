@@ -26,7 +26,7 @@ export default function NewsPage() {
             <View style={styles.container}>
                 <View style={styles.titleBox}>
                     <View style={styles.icon}>
-                        <FontAwesome5 name="newspaper" size={25} color="#98AD47" style={styles.newsIcon}/>
+                        <FontAwesome5 name="newspaper" size={25} color="#166069" style={styles.newsIcon}/>
                     </View>
                     <Text style={[styles.title, {fontSize: fontSize}]}>Alergias</Text>
                     <View style={styles.borderLine}/>
@@ -79,6 +79,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical: 30,
         fontFamily: 'Helvetica-Oblique',
-        color: '#98AD47'
+        color: '#166069'
     }
 });

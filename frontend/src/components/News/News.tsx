@@ -25,7 +25,12 @@ export default function News({newsPerPage, fontSize}: props ) {
                 data={displayedNews}
                 keyExtractor={(item) => item.title}
                 renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => Linking.openURL(item.url)}>
+                    <TouchableOpacity accessibilityRole="button" 
+                    onPress={() => Linking.openURL(item.url)}
+                    accessible={true} 
+                    accessibilityLabel={item.title} 
+                    accessibilityHint="Ao ser pressionado abre a notícia no navegador"
+                    >
                         <View style={styles.newsItem}>
                             <Text style={[styles.newsTitle, {fontSize:fontSize}]}>{item.title}</Text>
                             <Text style={{fontSize:fontSize - 2}}>{item.description}</Text>
@@ -76,7 +81,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     buttonContainer: {
-        backgroundColor: '#98AD47',
+        backgroundColor: '#166069',
         height: 50,
         width: 150,
         borderRadius: 20,
