@@ -251,7 +251,7 @@ export default function CreateSymptoms({ fontSize }: props) {
                     style={styles.sugestao}
                     onPress={() => handleSuggestionPress(sugestao)}
                   >
-                    <Text>{sugestao}</Text>
+                    <Text style={{fontSize: fontSize}}>{sugestao}</Text>
                   </TouchableOpacity>
                 ))}
             </View>
