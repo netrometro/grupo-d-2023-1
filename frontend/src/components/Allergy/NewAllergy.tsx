@@ -54,7 +54,7 @@ export default function NewAllergy({ fontSize }: props) {
                 accessibilityLabel="Cadastrar alergia" 
                 accessibilityHint="Ao ser pressionado cadastra o formulário preenchido"
                 disabled={isLoading}
-                style={{backgroundColor:"#166069"}}
+                style={[styles.button, {opacity: isLoading ? 0.5 : 1}]}
             >
                 <Text style={{color:"#fff", fontWeight:"bold"}}>Cadastrar</Text>
             </TouchableOpacity>
@@ -68,6 +68,12 @@ const styles = StyleSheet.create({
         padding: 20,
         marginBottom: 30,
     },
+    button: {
+        backgroundColor: "#166069",
+        borderRadius: 10,
+        padding: 10,
+        width: 100,
+      },
     title: {
         fontSize: 20,
         fontWeight: "bold",
