@@ -76,7 +76,7 @@ export default function CreateSymptoms({ fontSize }: props) {
 
       <View style={{display: "flex", flexDirection: "row", gap:8, justifyContent: "flex-start"}}>
         <View style={styles.elipse}> 
-            <FontAwesome5 name="heartbeat" size={20} color="#98AD47" />
+            <FontAwesome5 name="heartbeat" size={20} color="#166069" />
         </View>
         <Text style={[styles.mainTitle, {fontSize: fontSize + 4}]}> Sintomas </Text>
       </View>
@@ -87,7 +87,7 @@ export default function CreateSymptoms({ fontSize }: props) {
         
         <View>
             <Text style={[styles.label, {fontSize: fontSize - 2}]}> Sintoma: </Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
             style={[styles.input, {fontSize:fontSize}]}
             placeholder="Digite o nome do sintoma"
             value={symptomName}
@@ -96,7 +96,10 @@ export default function CreateSymptoms({ fontSize }: props) {
         </View>
         <View>
             <Text style={[styles.label, {fontSize: fontSize - 2}]}> Informações adicionais </Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
+            multiline
+            numberOfLines={4}
+            maxLength={40}
             style={[styles.bigInput, {fontSize:fontSize}]}
             placeholder="Ex: sintoma acontece quando estou nervosa"
             value={symptomDescription}
@@ -105,16 +108,18 @@ export default function CreateSymptoms({ fontSize }: props) {
         </View>
         <View>
             <Text style={[styles.label, {fontSize: fontSize - 2}]}> Medicação </Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
+            multiline
             style={[styles.input, {fontSize:fontSize}]}
-            placeholder="Digite medicação, caso tenha tomadoo alguma"
+            placeholder="Digite medicação, caso tenha tomado alguma"
             value={symptomMedication}
             onChangeText={setSymptomMedication}
             />
         </View>
         <View>
             <Text style={[styles.label, {fontSize: fontSize - 2}]}> Data inicial do sintoma: </Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
+            multiline
             style={[styles.input, {fontSize:fontSize}]}
             placeholder="Digite a data em que o sintoma começou"
             value={symptomInitialDate}
@@ -123,7 +128,8 @@ export default function CreateSymptoms({ fontSize }: props) {
         </View>
         <View>
             <Text style={[styles.label, {fontSize: fontSize - 2}]}> Data final: </Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
+            multiline
             style={[styles.input, {fontSize:fontSize}]}
             placeholder="Digite a data em que parou de sentir sintoma"
             value={symptomFinalDate}
@@ -133,7 +139,13 @@ export default function CreateSymptoms({ fontSize }: props) {
       </View>
       <View style={{ display: "flex", flexDirection: "column", alignContent: "flex-end" }}>
         {/* botão de cadastro */}
-        <TouchableOpacity style={styles.button} onPress={createSymptom}>
+        <TouchableOpacity accessibilityRole="button" 
+        style={styles.button} 
+        onPress={createSymptom} 
+        accessible={true} 
+        accessibilityLabel="Cadastrar sintoma" 
+        accessibilityHint="Ao ser pressionado cadastra o formulário preenchido"
+        >
           <Text style={{color: "#fff", fontWeight: "bold", fontSize:fontSize}}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
@@ -154,7 +166,7 @@ const styles = StyleSheet.create({
 
   divisor:{
     borderBottomWidth: 1,
-    borderBottomColor: "#98AD47",
+    borderBottomColor: "#166069",
     padding: 20
   },
 
@@ -167,7 +179,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "normal",
-    color: "#98AD47",
+    color: "#166069",
     marginTop: 8,
     marginBottom: 10,
     textAlign: "left",
@@ -181,12 +193,12 @@ const styles = StyleSheet.create({
   labelgreen: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#98AD47",
+    color: "#166069",
     marginBottom: 10,
   },
 
   button: {
-    backgroundColor: "#98AD47",
+    backgroundColor: "#166069",
     borderRadius: 10,
     padding: 10,
     width: 100,
@@ -195,16 +207,17 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
     width: 308,
-    height: 33,
+    flexWrap: "wrap",
+    height: "auto",
     borderRadius: 19,
     backgroundColor: "#D9D9D9",
-    paddingStart: 10,
+    padding: 10,
     fontSize: 12,
   },
   bigInput: {
     marginBottom: 10,
     width: 308,
-    height: 50,
+    height: "auto",
     borderRadius: 19,
     backgroundColor: "#D9D9D9",
     paddingStart: 10,

@@ -34,19 +34,28 @@ export default function ListSymptoms({ fontSize }: props) {
     const renderSymptomCard = ({ item }) => (
       <View style={styles.card}>
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-          <TouchableOpacity style={{ marginRight: 10 }}>
+          <TouchableOpacity accessibilityRole="button" 
+          style={{ marginRight: 10 }}
+          accessible={true} 
+          accessibilityLabel="Editar sintoma" 
+          accessibilityHint="Ao ser pressionado edita o sintoma selecionado"
+          >
             <Feather 
             name="edit" 
             size={20} 
-            color="#98AD47"
+            color="#166069"
             onPress={() =>  navigate.navigate("EditSymptoms")} 
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity accessibilityRole="button"
+          accessible={true} 
+          accessibilityLabel="Excluir sintoma" 
+          accessibilityHint="Ao ser pressionado exclui o sintoma selecionado"
+          >
             <Feather
               name="trash-2"
               size={20}
-              color="#98AD47"
+              color="#166069"
               onPress={() => deleteSymptom(item.id)}
             />
           </TouchableOpacity>
@@ -91,7 +100,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "normal",
-    color: "#98AD47",
+    color: "#166069",
     margin: 10,
   },
   label: {
@@ -102,7 +111,7 @@ const styles = StyleSheet.create({
   labelgreen: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#98AD47",
+    color: "#166069",
     marginTop: 10,
   },
   card: {

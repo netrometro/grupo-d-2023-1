@@ -51,36 +51,36 @@ export default function EditSymptom(id: number) {
         <View style={styles.container}>
             <Text style={styles.mainTitle}>Editar Sintoma</Text>
             <Text style={styles.label}>Nome do sintoma</Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
                 style={styles.input}
                 onChangeText={(text) => setName(text)}
                 value={name}
             />
             <Text style={styles.label}>Descrição</Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
                 style={styles.bigInput}
                 onChangeText={(text) => setDescription(text)}
                 value={description}
             />
             <Text style={styles.label}>Medicação</Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
                 style={styles.input}
                 onChangeText={(text) => setMedication(text)}
                 value={medication}
             />
             <Text style={styles.label}>Data de início</Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
                 style={styles.input}
                 onChangeText={(text) => setStartDate(text)}
                 value={startDate}
             />
             <Text style={styles.label}>Data de término</Text>
-            <TextInput
+            <TextInput accessibilityRole="text"
                 style={styles.input}
                 onChangeText={(text) => setEndDate(text)}
                 value={endDate}
             />
-            <TouchableOpacity
+            <TouchableOpacity accessibilityRole="button"
                 style={styles.button}
                 onPress={(event) => handleUpdate(event)}
             >
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 20,
       fontWeight: "normal",
-      color: "#98AD47",
+      color: "#166069",
       marginTop: 8,
       marginBottom: 10,
       textAlign: "left",
@@ -123,12 +123,12 @@ const styles = StyleSheet.create({
     labelgreen: {
       fontSize: 14,
       fontWeight: "bold",
-      color: "#98AD47",
+      color: "#166069",
       marginBottom: 10,
     },
   
     button: {
-      backgroundColor: "#98AD47",
+      backgroundColor: "#166069",
       borderRadius: 10,
       padding: 10,
       width: "auto",
