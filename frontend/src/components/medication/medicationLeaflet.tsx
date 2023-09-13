@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Oblique",
     paddingLeft: 20,
     paddingRight: 20,
-    marginTop: 90,
+    marginTop: 110,
   },
 
   divisor: {
