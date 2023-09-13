@@ -7,9 +7,10 @@ import MedicationLeaflet from "../components/medication/medicationLeaflet";
 export default function Medication() {
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <Header />
+      <ScrollView style={styles.sview}>
+        <View>
         <Dosage />
+        </View>
         <MedicationLeaflet />
       </ScrollView>
     </View>
@@ -21,6 +22,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Helvetica-Oblique",
-    paddingBottom: 50,
+    paddingBottom: 10,
   },
+  sview:{
+    flex: 1
+  }
 });
