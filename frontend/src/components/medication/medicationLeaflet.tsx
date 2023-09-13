@@ -7,11 +7,10 @@ import {
   Linking,
   TouchableOpacity,
   Modal,
-  ScrollView,
+  Keyboard,
 } from "react-native";
 import axios from "axios";
 import { props } from "../props";
-
 
 const sugestoesMedicamentos = [
   "Paracetamol",
@@ -124,21 +123,11 @@ const sugestoesMedicamentos = [
 ];
 
 
-export default function MedicationLeaflet({ fontSize }: props) {
+export default function MedicationLeaflet({fontSize}: props) {
   const [nomeMedicamento, setNomeMedicamento] = useState("");
   const [idBula, setIdBula] = useState("");
   const [pdfBula, setPdfBula] = useState("");
-  const [sugestoesVisiveis, setSugestoesVisiveis] = useState(false);
-
-  const handleInputChange = (text) => {
-    setNomeMedicamento(text);
-    setSugestoesVisiveis(true);
-  };
-
-  const handleSugestaoPress = (sugestao) => {
-    setNomeMedicamento(sugestao);
-    setSugestoesVisiveis(false);
-  };
+  const [suggestionsVisible, setSuggestionsVisible] = useState(false);
 
   const handlePesquisarMedicamento = async () => {
     try {
@@ -176,42 +165,47 @@ export default function MedicationLeaflet({ fontSize }: props) {
     }
   };
 
+  const handleMedicationChange = (text: string) => {
+    setNomeMedicamento(text);
+    setSuggestionsVisible(text.length > 0);
+  };
+
+  const handleSuggestionPress = (sugestao: string) => {
+    setNomeMedicamento(sugestao);
+    setSuggestionsVisible(false);
+    Keyboard.dismiss();
+  };
+
+
   return (
-    
     <View style={styles.container}>
+      <View style={styles.divisor}></View>
       <Text style={[styles.title, {fontSize:fontSize + 4}]}>Pesquisar Bula de Medicamento</Text>
       <Text style={[styles.label, {fontSize:fontSize}]}>Nome do Medicamento:</Text>
-      <TextInput accessibilityRole="text"
+      <TextInput
         style={[styles.input, {fontSize:fontSize}]}
         value={nomeMedicamento}
-        onChangeText={handleInputChange}
+        onChangeText={handleMedicationChange}
       />
-      
-      {sugestoesVisiveis && (
-        <View style={styles.sugestoesContainer}>
-          {sugestoesMedicamentos
-            .filter((sugestao) =>
-              sugestao.toLowerCase().includes(nomeMedicamento.toLowerCase())
-            )
-            .map((sugestao, index) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.sugestao}
-                onPress={() => handleSugestaoPress(sugestao)}
-              >
-                <Text>{sugestao}</Text>
-              </TouchableOpacity>
-            ))}
-        </View>
-      )}
-      <TouchableOpacity accessibilityRole="button" 
-      onPress={handlePesquisarMedicamento} 
-      style={styles.button}
-      accessible={true} 
-      accessibilityLabel="Pesquisar Medicamento" 
-      accessibilityHint="Ao ser pressionado pesquisa o medicamento digitado"
-      >
-        <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Pesquisar</Text>
+      {suggestionsVisible && (
+            <View style={styles.sugestoesContainer}>
+              {sugestoesMedicamentos
+                .filter((sugestao) =>
+                  sugestao.toLowerCase().includes(nomeMedicamento.toLowerCase())
+                )
+                .map((sugestao, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={styles.sugestao}
+                    onPress={() => handleSuggestionPress(sugestao)}
+                  >
+                    <Text style={{fontSize: fontSize}}>{sugestao}</Text>
+                  </TouchableOpacity>
+                ))}
+            </View>
+          )}
+      <TouchableOpacity onPress={handlePesquisarMedicamento} style={styles.button}>
+      <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Pesquisar</Text>
       </TouchableOpacity>
       {idBula ? (
         <TouchableOpacity accessibilityRole="button" 
@@ -236,7 +230,6 @@ export default function MedicationLeaflet({ fontSize }: props) {
         </Text>
       ) : null} 
     </View>
-   
   );
 }
 
@@ -319,19 +312,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
   sugestoesContainer: {
-    position: "absolute",
-    top: 90,
-    left: 20,
-    width: "90%",
     backgroundColor: "#fff",
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 5,
-    zIndex: 999,
   },
-
   sugestao: {
     padding: 10,
     borderBottomWidth: 1,
