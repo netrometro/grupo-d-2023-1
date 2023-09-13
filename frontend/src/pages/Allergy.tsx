@@ -18,7 +18,7 @@ export default function Allergy() {
   };
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={allergyStyles.container}>
       <View>
         <Header />
         <FontSize
@@ -54,6 +54,7 @@ export default function Allergy() {
 const allergyStyles = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom:50,
   },
   containerComp: {
     flex: 2,
