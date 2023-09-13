@@ -9,7 +9,7 @@ export default function GetBMI({ fontSize }: props) {
     const [statusText, setStatusText] = useState("");
     const [statusDescription, setStatusDescription] = useState("");
 
-    const userId = "7340db54-07b4-4608-8ad4-c7cf9755566e"
+    const userId = "b4eb87c0-efd5-478f-b121-31cabd7bd739"
 
     useEffect(() => {
         const fetchLatestInfo = async () => {
@@ -41,7 +41,7 @@ export default function GetBMI({ fontSize }: props) {
     }, []);
 
     const calculateBMI = (weight, height) => {
-        const heightInMeters = height / 100;
+        const heightInMeters = height ;
         return (weight / (heightInMeters * heightInMeters)).toFixed(2);
     };
 
