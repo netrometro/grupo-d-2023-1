@@ -25,6 +25,7 @@
     "@fastify/cors": "^8.3.0",
     "@prisma/client": "^5.3.0",
     "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
     "fastify": "^4.21.0",
     "zod": "^3.22.2"
   }
