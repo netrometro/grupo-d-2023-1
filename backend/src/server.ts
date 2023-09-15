@@ -1,28 +1,34 @@
-import Fastify from "fastify";
-import { FastifyInstance } from "fastify/types/instance";
-import fastifyCors from "@fastify/cors";
-import symptomController from "./symptom/symptomController";
-import allergiesController from "./allergies/allergiesController";
-import infoController from "./info/infoController";
+import Fastify from 'fastify'
+import { FastifyInstance } from 'fastify/types/instance';
+import fastifyCors from '@fastify/cors';
+import symptomController from './symptom/symptomController';
+import allergiesController from './allergies/allergiesController';
+import infoController from './info/infoController';
 
 export const fastify: FastifyInstance = Fastify({
-  logger: true,
+  logger: true
 });
 
 fastify.register(fastifyCors, {
-  origin: "*",
+  origin: '*',
 });
 
-fastify.register(symptomController, allergiesController);
-fastify.register(infoController);
+fastify.register(symptomController, allergiesController)
+fastify.register(infoController)
 
 /**
  * Run the server!
  */
+const start = async () => {
+  try {
+    await fastify.listen({
+      port: process.env.PORT ? Number(process.env.PORT) : 3333,
+    });
+  } catch (err) {
+    fastify.log.error(err)
+    process.exit(1)
+  }
+}
 
-fastify.listen({
-  host:'0.0.0.0',
-  port:process.env.PORT ? Number(process.env.PORT) : 3333,
-}).then(() =>{
-  console.log("HTTP SERVER LISTENING STARTED")
-})
+start() 
+

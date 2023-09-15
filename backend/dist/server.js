@@ -293,12 +293,17 @@ fastify.register(import_cors.default, {
 });
 fastify.register(symptomController, allergyController);
 fastify.register(infoController);
-fastify.listen({
-  host: "0.0.0.0",
-  port: process.env.PORT ? Number(process.env.PORT) : 3333
-}).then(() => {
-  console.log("HTTP SERVER LISTENING STARTED");
-});
+var start = async () => {
+  try {
+    await fastify.listen({
+      port: process.env.PORT ? Number(process.env.PORT) : 3333
+    });
+  } catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
+};
+start();
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   fastify
