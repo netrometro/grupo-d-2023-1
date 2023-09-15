@@ -19,24 +19,18 @@ export default function Medication() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
         <Header />
         <FontSize onDecreaseFontSize={decreaseFontSize} onIncreaseFontSize={increaseFontSize} fontSize={fontSize}/>
         <Dosage fontSize={fontSize}/>
         <MedicationLeaflet fontSize={fontSize}/>
-      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Helvetica-Oblique",
     paddingBottom: 10,
   },
-  sview:{
-    flex: 1
-  }
 });

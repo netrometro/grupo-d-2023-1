@@ -33,10 +33,13 @@ var prisma = new import_client.PrismaClient({
 // src/symptom/symptomController.ts
 var import_zod = require("zod");
 async function symptomController(fastify) {
+  fastify.get("/", (request, reply) => {
+    reply.status(200);
+  });
   fastify.get("/symptoms", async (request, reply) => {
     try {
       const getSymptom = await prisma.symptom.findMany({});
-      reply.send(getSymptom);
+      reply.status(200).send(getSymptom);
     } catch (error) {
       console.error(error);
       reply.status(400).send({ message: "Erro ao buscar sintoma!" });
@@ -85,7 +88,7 @@ async function symptomController(fastify) {
   fastify.put("/symptoms/update/:id", async (request, reply) => {
     const { name, description, medication, startDate, endDate } = createSymptomSchema.parse(request.body);
     try {
-      const { id } = symptomIdParam.parse(request.params);
+      const { id } = request.params;
       const updatedSymptom = await prisma.symptom.update({
         where: { id },
         data: {
@@ -105,7 +108,7 @@ async function symptomController(fastify) {
   });
   fastify.delete("/symptoms/delete/:id", async (request, reply) => {
     try {
-      const { id } = symptomIdParam.parse(request.params);
+      const { id } = request.params;
       await prisma.symptom.delete({
         where: { id: Number(id) }
       });

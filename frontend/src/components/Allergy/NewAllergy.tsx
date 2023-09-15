@@ -16,7 +16,7 @@ export default function NewAllergy({ fontSize }: props) {
                 name,
                 treatment,
                 description,
-                user_id: "b4eb87c0-efd5-478f-b121-31cabd7bd739",
+                user_id: "ca696a03-6922-4ef2-99cf-9e35b2cf924f",
             });
             setIsLoading(false);
             Alert.alert("Sucesso", response.data.message);

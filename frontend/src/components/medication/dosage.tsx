@@ -10,7 +10,7 @@ export default function Dosage({ fontSize }: props) {
   const [info, setInfo] = useState(null);
   const [weight, setWeight] = useState(0);
 
-  const user_id = "b4eb87c0-efd5-478f-b121-31cabd7bd739";
+  const user_id = "ca696a03-6922-4ef2-99cf-9e35b2cf924f";
 
   useEffect(() => {
     const fetchInfo = async () => {

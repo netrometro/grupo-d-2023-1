@@ -146,7 +146,7 @@ export default function CreateSymptoms({ fontSize }: props) {
   const [symptomInitialDate, setSymptomInitialDate] = useState("");
   const [symptomFinalDate, setSymptomFinalDate] = useState("");
   const [suggestionsVisible, setSuggestionsVisible] = useState(false);
-  const user_id = "b4eb87c0-efd5-478f-b121-31cabd7bd739";
+  const user_id = "ca696a03-6922-4ef2-99cf-9e35b2cf924f";
 
   async function createSymptom(event: GestureResponderEvent) {
     event.preventDefault();
