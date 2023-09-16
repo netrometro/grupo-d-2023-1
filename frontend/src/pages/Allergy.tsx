@@ -53,7 +53,6 @@ export default function Allergy() {
 
 const allergyStyles = StyleSheet.create({
   container: {
-    flex: 1,
     marginBottom:50,
   },
   containerComp: {

@@ -59,7 +59,6 @@ export default function GetAllergy({ fontSize }: props) {
 }
 const allergyStyles = StyleSheet.create({
     container: {
-        flex: 1,
         padding: 20,
         alignItems: 'center'
     },

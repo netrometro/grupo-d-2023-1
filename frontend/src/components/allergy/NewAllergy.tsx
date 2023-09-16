@@ -64,7 +64,6 @@ export default function NewAllergy({ fontSize }: props) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         padding: 20,
         marginBottom: 30,
     },

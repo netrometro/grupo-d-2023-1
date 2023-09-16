@@ -122,8 +122,7 @@ const sugestoesMedicamentos = [
   "Zopiclona",
 ];
 
-
-export default function MedicationLeaflet({fontSize}: props) {
+export default function MedicationLeaflet({ fontSize }: props) {
   const [nomeMedicamento, setNomeMedicamento] = useState("");
   const [idBula, setIdBula] = useState("");
   const [pdfBula, setPdfBula] = useState("");
@@ -176,77 +175,95 @@ export default function MedicationLeaflet({fontSize}: props) {
     Keyboard.dismiss();
   };
 
-
   return (
-    <View style={styles.container}>
+    <>
       <View style={styles.divisor}></View>
-      <Text style={[styles.title, {fontSize:fontSize + 4}]}>Pesquisar Bula de Medicamento</Text>
-      <Text style={[styles.label, {fontSize:fontSize}]}>Nome do Medicamento:</Text>
-      <TextInput
-        style={[styles.input, {fontSize:fontSize}]}
-        value={nomeMedicamento}
-        onChangeText={handleMedicationChange}
-      />
-      {suggestionsVisible && (
-            <View style={styles.sugestoesContainer}>
-              {sugestoesMedicamentos
-                .filter((sugestao) =>
-                  sugestao.toLowerCase().includes(nomeMedicamento.toLowerCase())
-                )
-                .map((sugestao, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    style={styles.sugestao}
-                    onPress={() => handleSuggestionPress(sugestao)}
-                  >
-                    <Text style={{fontSize: fontSize}}>{sugestao}</Text>
-                  </TouchableOpacity>
-                ))}
-            </View>
-          )}
-      <TouchableOpacity onPress={handlePesquisarMedicamento} style={styles.button}>
-      <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Pesquisar</Text>
-      </TouchableOpacity>
-      {idBula ? (
-        <TouchableOpacity accessibilityRole="button" 
-        style={styles.button2} 
-        onPress={handleBuscarPDFBula}
-        accessible={true} 
-        accessibilityLabel="Buscar PDF da Bula" 
-        accessibilityHint="Ao ser pressionado busca o PDF da bula do medicamento pesquisado"
-        >
-          <Text style={{color: "#fff", fontWeight: "bold", fontSize: fontSize}}>Buscar PDF da Bula</Text>
-        </TouchableOpacity>
-      ) : null}
-      {pdfBula ? (
-        <Text style={[styles.label, {fontSize:fontSize}]}>
-          Link para a bula:
-          <Text accessibilityRole="link"
-            style={{ color: "blue", textDecorationLine: "underline"}}
-            onPress={() => Linking.openURL(pdfBula)}
-          >
-            {pdfBula}
-          </Text>
+      <View style={styles.container}>
+        <Text style={[styles.title, { fontSize: fontSize + 4 }]}>
+          Pesquisar Bula de Medicamento
         </Text>
-      ) : null} 
-    </View>
+        <Text style={[styles.label, { fontSize: fontSize }]}>
+          Nome do Medicamento:
+        </Text>
+        <TextInput
+          style={[styles.input, { fontSize: fontSize }]}
+          value={nomeMedicamento}
+          onChangeText={handleMedicationChange}
+        />
+        {suggestionsVisible && (
+          <View style={styles.sugestoesContainer}>
+            {sugestoesMedicamentos
+              .filter((sugestao) =>
+                sugestao.toLowerCase().includes(nomeMedicamento.toLowerCase())
+              )
+              .map((sugestao, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.sugestao}
+                  onPress={() => handleSuggestionPress(sugestao)}
+                >
+                  <Text style={{ fontSize: fontSize }}>{sugestao}</Text>
+                </TouchableOpacity>
+              ))}
+          </View>
+        )}
+        <TouchableOpacity
+          onPress={handlePesquisarMedicamento}
+          style={styles.button}
+        >
+          <Text
+            style={{ color: "#fff", fontWeight: "bold", fontSize: fontSize }}
+          >
+            Pesquisar
+          </Text>
+        </TouchableOpacity>
+        {idBula ? (
+          <TouchableOpacity
+            accessibilityRole="button"
+            style={styles.button2}
+            onPress={handleBuscarPDFBula}
+            accessible={true}
+            accessibilityLabel="Buscar PDF da Bula"
+            accessibilityHint="Ao ser pressionado busca o PDF da bula do medicamento pesquisado"
+          >
+            <Text
+              style={{ color: "#fff", fontWeight: "bold", fontSize: fontSize }}
+            >
+              Buscar PDF da Bula
+            </Text>
+          </TouchableOpacity>
+        ) : null}
+        {pdfBula ? (
+          <Text style={[styles.label, { fontSize: fontSize }]}>
+            Link para a bula:
+            <Text
+              accessibilityRole="link"
+              style={{ color: "blue", textDecorationLine: "underline" }}
+              onPress={() => Linking.openURL(pdfBula)}
+            >
+              {pdfBula}
+            </Text>
+          </Text>
+        ) : null}
+      </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
     fontFamily: "Helvetica-Oblique",
     paddingLeft: 20,
     paddingRight: 20,
-    marginTop: 110,
+    marginTop: 5,
+    marginBottom: 40,
   },
 
   divisor: {
     borderBottomWidth: 1,
-    borderBottomColor: "#98AD47",
-    padding: 20,
+    borderBottomColor: "#166069",
+    margin: 10,
   },
 
   title: {

@@ -82,12 +82,11 @@ export default function Dosage({ fontSize }: props) {
           onChangeText={ (number) => handleChange(number)}
         />
         <View style={styles.divisor}></View>
-        <View style={{ marginBottom: 180}}>
+        <View style={{ marginBottom: 10}}>
           <Text style={[styles.label, {fontSize:fontSize}]}>Resultado</Text>
           <Text style={[styles.labelgreen, {fontSize:fontSize}]}>{calculateDosage()} mg</Text>
           <Text style={[styles.label, {fontSize:fontSize}]}>Resultado em ml</Text>
           <Text style={[styles.labelgreen, {fontSize:fontSize}]}>{parseToMl()} ml</Text>
-          <View style={styles.divisor}></View>
         </View>
       </View>
     </View>
@@ -97,13 +96,12 @@ export default function Dosage({ fontSize }: props) {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: "#fff",
       fontFamily: "Helvetica-Oblique",
-      paddingBottom: 50,
       paddingLeft: 20,
       paddingRight: 20,
-      marginBottom: 50,
+      marginBottom: 10,
+      marginTop: 20,
     },
   
     divisor:{
