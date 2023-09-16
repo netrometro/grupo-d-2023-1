@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import Dosage from "../components/medication/dosage";
 import Header from "../components/Header";
 import MedicationLeaflet from "../components/medication/medicationLeaflet";
@@ -18,12 +18,12 @@ export default function Medication() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
         <Header />
         <FontSize onDecreaseFontSize={decreaseFontSize} onIncreaseFontSize={increaseFontSize} fontSize={fontSize}/>
         <Dosage fontSize={fontSize}/>
         <MedicationLeaflet fontSize={fontSize}/>
-    </View>
+    </ScrollView>
   );
 }
 
